@@ -33,6 +33,79 @@ exports.sendMessage = async (req, res, next) => {
     next(error);
   }
 };
+
+///// SEND GAMBAR
+exports.sendImage = async (req, res, next) => {
+  try {
+    const to = req.body.to || req.query.to;
+    const caption = req.body.caption || req.query.caption;
+    const url = req.body.url || req.query.url;
+    const sessionId =
+      req.body.session || req.query.session || req.headers.session;
+
+    if (!to || !url) {
+      return res.status(400).json({
+        status: false,
+        data: {
+          error: "Missing Parameters",
+        },
+      });
+    }
+
+    // console.log("Tipe data dari url:", typeof url);
+    const send = await whatsapp.sendImage({
+      sessionId: sessionId,
+      to: to,
+      text: caption,
+      media: url,
+    });
+
+    if (send.status === 200) {
+      res.status(200).json({
+        status: true,
+        data: {
+          id: send?.key?.id,
+          status: send?.status,
+          message: send?.message?.extendedTextMessage?.text || "Not Text",
+          remoteJid: send?.key?.remoteJid,
+        },
+      });
+    } else {
+      res.status(200).json({
+        status: true,
+        data: {
+          id: send?.key?.id,
+          status: send?.status,
+          message: send?.message?.extendedTextMessage?.text || "Not Text",
+          remoteJid: send?.key?.remoteJid,
+        },
+      });
+    }
+
+    // const send = await whatsapp.sendImage({
+    //   sessionId,
+    //   to: to,
+    //   url: url,
+    //   caption: caption,
+    // });
+
+    // if (sender.status === 200) {
+    //   res.status(200).json({
+    //     status: true,
+    //     data: {
+    //       id: send?.key?.id,
+    //       status: send?.status,
+    //       message: send?.message?.extendedTextMessage?.text || "Not Text",
+    //       remoteJid: send?.key?.remoteJid,
+    //     },
+    //   });
+    // }
+
+  } catch (error) {
+    next(error);
+  }
+};
+
 exports.sendBulkMessage = async (req, res, next) => {
   try {
     const sessionId =
