@@ -89,6 +89,20 @@ Open On Browser & Start New Session
 | `data`    | `array`  | **Required**. Array Of Object Message Data          |
 | `delay`   | `number` | Delay Per-message in Miliseconds, Default to 5000ms |
 
+#### Send Text Message with Document 
+
+```
+  POST /send-document
+```
+
+| Body      | Type     | Description                                                              |
+| :-------- | :------- | :----------------------------------------------------------------------- |
+| `session` | `string` | **Required**. Session Name You Have Created                              |
+| `to`      | `string` | **Required**. Receiver Phone Number with Country Code (e.g: 62812345678) |
+| `caption` | `string` | **Required**. Text Message                                               |
+| `url`     | `string` | **Required**. Url Document                                               |
+| `filename`| `string` | **Required**. File name with extension (e.g: .docx, .pdf, .xlsx etc)     |
+
 #### Delete session
 
 ```
