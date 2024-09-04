@@ -143,3 +143,58 @@ exports.sendBulkMessage = async (req, res, next) => {
     next(error);
   }
 };
+
+// SEND DOCUMENT
+exports.sendDocument = async (req, res, next) => {
+  try {
+    const to = req.body.to || req.query.to;
+    const caption = req.body.caption || req.query.caption;
+    const url = req.body.url || req.query.url;
+    const sessionId =
+      req.body.session || req.query.session || req.headers.session;
+    const filename = req.body.filename || req.query.filename || req.headers.filename;
+
+    if (!to || !url) {
+      return res.status(400).json({
+        status: false,
+        data: {
+          error: "Missing Parameters",
+        },
+      });
+    }
+
+    // console.log("Tipe data dari url:", typeof url);
+    const send = await whatsapp.sendDocument({
+      sessionId: sessionId,
+      to: to,
+      filename: filename,
+      media: url,
+      text: caption,
+    });
+
+    if (send.status === 200) {
+      res.status(200).json({
+        status: true,
+        data: {
+          id: send?.key?.id,
+          status: send?.status,
+          message: send?.message?.extendedTextMessage?.text || "Not Text",
+          remoteJid: send?.key?.remoteJid,
+        },
+      });
+    } else {
+      res.status(200).json({
+        status: true,
+        data: {
+          id: send?.key?.id,
+          status: send?.status,
+          message: send?.message?.extendedTextMessage?.text || "Not Text",
+          remoteJid: send?.key?.remoteJid,
+        },
+      });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
