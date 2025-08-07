@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* DaisyUI Components will be injected here */
+
+/* Custom styles if needed */
+@layer components {
+    .btn-custom {
+        @apply btn;
+    }
+}
+
+@layer utilities {
+    .text-custom {
+        @apply text-primary;
+    }
+}

@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WhatsApp API Gateway</title>
+  <link href="/p/css/style.css" rel="stylesheet">
+</head>
 
-  <head>
-    <link href="/p/css/style.css" rel="stylesheet">
-  </head>
-
-<body class="p-8">
-
-  <div class="navbar bg-base-100 shadow-sm">
+<body class="min-h-screen bg-base-200">
+  <!-- Navbar -->
+  <div class="navbar bg-base-100 shadow-lg">
     <div class="navbar-start">
       <div class="dropdown">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
@@ -17,55 +18,246 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
           </svg>
         </div>
-        <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-          <li><a>Homepage</a></li>
-          <li><a>Portfolio</a></li>
-          <li><a>About</a></li>
+        <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+          <li><a href="/">Dashboard</a></li>
+          <li><a href="/api/session">Sessions</a></li>
+          <li><a href="/api/docs">API Docs</a></li>
         </ul>
       </div>
     </div>
     <div class="navbar-center">
-      <a class="btn btn-ghost text-xl">daisyUI</a>
+      <a class="btn btn-ghost text-xl font-bold">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-green-600" fill="currentColor"
+          viewBox="0 0 24 24">
+          <path
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.569-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.686" />
+        </svg>
+        WhatsApp API
+      </a>
     </div>
     <div class="navbar-end">
-      <button class="btn btn-ghost btn-circle">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
-      </button>
-      <button class="btn btn-ghost btn-circle">
-        <div class="indicator">
+      <div class="flex items-center gap-2">
+        <div class="badge badge-success">Online</div>
+
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="btn btn-ghost btn-circle" title="Toggle Theme">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
           </svg>
-          <span class="badge badge-xs badge-primary indicator-item"></span>
-        </div>
-      </button>
+        </button>
+
+        <button class="btn btn-ghost btn-circle">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </button>
+        <button class="btn btn-ghost btn-circle">
+          <div class="indicator">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+            <span class="badge badge-xs badge-primary indicator-item"></span>
+          </div>
+        </button>
+      </div>
     </div>
   </div>
 
-
-  <h1 class="text-3xl font-bold mb-4">Hello Express + Tailwind + DaisyUI</h1>
-  <button class="btn btn-primary">Tombol Daisy</button>
-
-  <h1 class="text-4xl text-red-600">Tailwind Aktif!</h1>
-  <button class="btn btn-primary">Tombol Daisy</button>
-
-  <div class="card w-80 bg-base-200">
-    <div class="card-body gap-3">
-      <input placeholder="Email" class="input" />
-      <label class="label">
-        <input type="checkbox" class="toggle toggle-sm" />
-        Submit to newsletter
-      </label>
-      <label class="label">
-        <input type="checkbox" class="toggle toggle-sm" />
-        Accept terms of use
-      </label>
-      <button class="btn btn-neutral">Save</button>
+  <!-- Hero Section -->
+  <div class="hero min-h-[50vh] bg-gradient-to-r from-green-400 to-blue-500">
+    <div class="hero-content text-center text-white">
+      <div class="max-w-md">
+        <h1 class="text-5xl font-bold mb-6">WhatsApp API Gateway</h1>
+        <p class="text-xl mb-8 opacity-90">
+          Powerful and easy-to-use WhatsApp messaging API for your applications
+        </p>
+        <button class="btn btn-primary btn-lg mr-4">Get Started</button>
+        <button class="btn btn-outline btn-lg text-white border-white hover:bg-white hover:text-gray-800">
+          Documentation
+        </button>
+      </div>
     </div>
-  </div </body>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container mx-auto p-8">
+    <!-- Stats -->
+    <div class="stats shadow w-full mb-8">
+      <div class="stat">
+        <div class="stat-figure text-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+            class="inline-block w-8 h-8 stroke-current">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+            </path>
+          </svg>
+        </div>
+        <div class="stat-title">Active Sessions</div>
+        <div class="stat-value text-primary">0</div>
+        <div class="stat-desc">Currently connected</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-figure text-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+            class="inline-block w-8 h-8 stroke-current">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+        </div>
+        <div class="stat-title">Messages Sent</div>
+        <div class="stat-value text-secondary">0</div>
+        <div class="stat-desc">Today</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-figure text-accent">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+            class="inline-block w-8 h-8 stroke-current">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4">
+            </path>
+          </svg>
+        </div>
+        <div class="stat-title">API Calls</div>
+        <div class="stat-value">0</div>
+        <div class="stat-desc">This month</div>
+      </div>
+    </div>
+
+    <!-- Feature Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+      <!-- Session Management -->
+      <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
+        <div class="card-body">
+          <h2 class="card-title text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
+            </svg>
+            Session Management
+          </h2>
+          <p>Manage multiple WhatsApp sessions simultaneously with easy-to-use APIs.</p>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary btn-sm">Manage Sessions</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Message API -->
+      <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
+        <div class="card-body">
+          <h2 class="card-title text-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            </svg>
+            Send Messages
+          </h2>
+          <p>Send text, images, documents, and more through WhatsApp with simple API calls.</p>
+          <div class="card-actions justify-end">
+            <button class="btn btn-secondary btn-sm">Send Message</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- QR Scanner -->
+      <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
+        <div class="card-body">
+          <h2 class="card-title text-accent">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+            </svg>
+            QR Code Login
+          </h2>
+          <p>Quick and secure session authentication using QR codes.</p>
+          <div class="card-actions justify-end">
+            <button class="btn btn-accent btn-sm">Scan QR</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title text-2xl mb-6">Quick Actions</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Create Session Form -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text font-semibold">Create New Session</span>
+            </label>
+            <div class="input-group">
+              <input type="text" placeholder="Session name..." class="input input-bordered flex-1" />
+              <button class="btn btn-primary">Create</button>
+            </div>
+            <label class="label">
+              <span class="label-text-alt">Enter a unique name for your WhatsApp session</span>
+            </label>
+          </div>
+
+          <!-- Send Test Message -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text font-semibold">Send Test Message</span>
+            </label>
+            <div class="input-group">
+              <input type="tel" placeholder="Phone number..." class="input input-bordered flex-1" />
+              <button class="btn btn-secondary">Send</button>
+            </div>
+            <label class="label">
+              <span class="label-text-alt">Format: +62812345678 (include country code)</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- API Example -->
+        <div class="divider">API Example</div>
+
+        <div class="mockup-code">
+          <pre data-prefix="$"><code>curl -X POST http://localhost:5000/api/send-message</code></pre>
+          <pre data-prefix=">" class="text-warning"><code>-H "Content-Type: application/json"</code></pre>
+          <pre data-prefix=">"
+            class="text-success"><code>-d '{"session": "main", "to": "+6281234567890", "text": "Hello World!"}'</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer footer-center p-10 bg-base-300 text-base-content">
+    <div>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.569-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.686" />
+      </svg>
+      <p class="font-bold">
+        WhatsApp API Gateway <br />
+        Built with Express.js, Tailwind CSS & DaisyUI
+      </p>
+      <p>Copyright © 2025 - All rights reserved</p>
+    </div>
+    <div>
+      <div class="grid grid-flow-col gap-4">
+        <a class="link link-hover">Documentation</a>
+        <a class="link link-hover">API Reference</a>
+        <a class="link link-hover">Support</a>
+        <a class="link link-hover">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/p/js/theme-toggle.js"></script>
+</body>
 
 </html>

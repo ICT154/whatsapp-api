@@ -1,27 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Scan QR</title>
-    <style>
-        body {
-            padding: 5rem;
-        }
-    </style>
+    <title>Scan QR Code - WhatsApp API</title>
+    <link href="/p/css/style.css" rel="stylesheet">
 </head>
 
-<body>
-    <div id="qrcode"></div>
+<body class="min-h-screen bg-base-200">
+    <!-- Navbar -->
+    <div class="navbar bg-base-100 shadow-lg">
+        <div class="navbar-start">
+            <a class="btn btn-ghost text-xl">WhatsApp API</a>
+        </div>
+        <div class="navbar-end">
+            <!-- Theme Toggle -->
+            <button id="theme-toggle" class="btn btn-ghost btn-circle mr-2" title="Toggle Theme">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+            </button>
+            <div class="badge badge-primary badge-lg">QR Scan</div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto p-8">
+        <div class="hero min-h-[80vh]">
+            <div class="hero-content text-center">
+                <div class="max-w-md">
+                    <h1 class="text-5xl font-bold text-primary">Scan QR Code</h1>
+                    <p class="py-6 text-base-content/70">
+                        Scan the QR code below with your WhatsApp to connect your session.
+                    </p>
+
+                    <!-- QR Code Container -->
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body items-center">
+                            <div id="qrcode" class="p-4 bg-white rounded-lg shadow-inner">
+                                <!-- QR Code will be inserted here -->
+                            </div>
+
+                            <!-- Loading State -->
+                            <div class="loading-container mt-4">
+                                <span class="loading loading-spinner loading-lg text-primary"></span>
+                                <p class="text-sm text-base-content/60 mt-2">Loading QR Code...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Instructions -->
+                    <div class="alert alert-info mt-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            class="stroke-current shrink-0 w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <div>
+                            <h3 class="font-bold">How to scan:</h3>
+                            <div class="text-xs">
+                                1. Open WhatsApp on your phone<br>
+                                2. Go to Settings > Linked Devices<br>
+                                3. Tap "Link a Device" and scan this QR code
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript">
         console.log('<%= qr %>')
         let qr = '<%= qr %>'
         let image = new Image()
         image.src = qr
-        document.body.appendChild(image)
+        image.classList.add('rounded-lg', 'shadow-lg')
+        image.onload = function () {
+            // Hide loading state
+            document.querySelector('.loading-container').style.display = 'none'
+        }
+        document.getElementById('qrcode').appendChild(image)
     </script>
+
+    <!-- Scripts -->
+    <script src="/p/js/theme-toggle.js"></script>
 </body>
 
 </html>
