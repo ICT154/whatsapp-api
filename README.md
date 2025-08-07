@@ -119,7 +119,7 @@ All secure endpoints require the `KEY` parameter from your `.env` file.
 
 ### 📱 Session Management
 
-#### Create New Session & Get QR Code
+#### Create New Session & Get QR Code (Web Interface)
 
 ```http
 GET /start-session?session=SESSION_NAME&scan=true
@@ -133,6 +133,31 @@ GET /start-session?session=SESSION_NAME&scan=true
 **Example:**
 ```bash
 http://localhost:5001/start-session?session=main&scan=true
+```
+
+#### Create New Session & Get QR Code (API JSON Response)
+
+```http
+GET /start-session-api?session=SESSION_NAME
+```
+
+| Parameter | Type      | Description                              |
+| :-------- | :-------- | :--------------------------------------- |
+| `session` | `string`  | **Required**. Your unique session name   |
+
+**Response:**
+```json
+{
+  "status": true,
+  "data": {
+    "qr": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARQAAAEUCAYAAADqcMl5..."
+  }
+}
+```
+
+**Example:**
+```bash
+curl -X GET "http://localhost:5001/start-session-api?session=main"
 ```
 
 #### Delete Session

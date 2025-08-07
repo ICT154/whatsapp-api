@@ -14,17 +14,55 @@ exports.createSession = async (req, res, next) => {
     if (!sessionName) {
       throw new Error("Bad Request");
     }
+
     whatsapp.onQRUpdated(async (data) => {
       if (res && !res.headersSent) {
         const qr = await toDataURL(data.qr);
-        if (scan && data.sessionId == sessionName) {
-          res.render("scan", { qr: qr });  /// ini kalo mau tampil view
-          // res.status(200).json(
-          //   responseSuccessWithData({
-          //     qr: qr,
-          //   })
-          // );
+        if (data.sessionId == sessionName) {
+          // Check if request is from web browser (scan=true) or API call
+          const isWebRequest = scan === 'true' || req.headers.accept?.includes('text/html');
+
+          if (isWebRequest) {
+            // Web browser request - show HTML page with QR
+            res.render("scan", { qr: qr });
+          } else {
+            // API request - return JSON response
+            res.status(200).json(
+              responseSuccessWithData({
+                qr: qr,
+              })
+            );
+          }
         } else {
+          // For other sessions, always return JSON
+          res.status(200).json(
+            responseSuccessWithData({
+              qr: qr,
+            })
+          );
+        }
+      }
+    });
+    await whatsapp.startSession(sessionName, { printQR: true });
+  } catch (error) {
+    next(error);
+  }
+};
+
+///// create session with pure JSON response for API calls
+exports.createSessionAPI = async (req, res, next) => {
+  try {
+    const sessionName =
+      req.body.session || req.query.session || req.headers.session;
+    if (!sessionName) {
+      throw new Error("Bad Request");
+    }
+
+    whatsapp.onQRUpdated(async (data) => {
+      if (res && !res.headersSent) {
+        const qr = await toDataURL(data.qr);
+        if (data.sessionId == sessionName) {
+          // Always return JSON for API endpoint
           res.status(200).json(
             responseSuccessWithData({
               qr: qr,

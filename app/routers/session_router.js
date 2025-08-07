@@ -4,11 +4,13 @@ const {
   deleteSession,
   sessions,
   createSessionByQR,
+  createSessionAPI,
 } = require("../controllers/session_controller");
 
 const SessionRouter = Router();
 
 SessionRouter.all("/start-session", createSession);
+SessionRouter.all("/start-session-api", createSessionAPI);
 SessionRouter.all("/start-session-json", createSessionByQR);
 SessionRouter.all("/delete-session", deleteSession);
 SessionRouter.all("/sessions", sessions);
