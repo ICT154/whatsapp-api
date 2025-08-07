@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const MessageRouter = require("./message_router");
 const SessionRouter = require("./session_router");
-const WebhookRouter = require("./webhook_router");
+// const WebhookRouter = require("./webhook_router"); // Disabled
 
 const MainRouter = Router();
 
@@ -11,6 +11,6 @@ MainRouter.get("/", (req, res) => {
 
 MainRouter.use(SessionRouter);
 MainRouter.use(MessageRouter);
-MainRouter.use("/webhook", WebhookRouter);
+// MainRouter.use("/webhook", WebhookRouter); // Webhook disabled
 
 module.exports = MainRouter;
