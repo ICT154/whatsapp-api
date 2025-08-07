@@ -2,21 +2,26 @@
 <html lang="en" data-theme="light">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scan QR Code - WhatsApp API</title>
     <link href="/p/css/style.css" rel="stylesheet">
 </head>
 
-<body class="min-h-screen bg-base-200">
-    <!-- Navbar -->
-    <div class="navbar bg-base-100 shadow-lg">
+<body class="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100">
+    <!-- Header -->
+    <div class="navbar bg-white/80 backdrop-blur-sm shadow-lg">
         <div class="navbar-start">
-            <a class="btn btn-ghost text-xl">WhatsApp API</a>
+            <a href="/" class="btn btn-ghost text-xl font-bold">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-green-600" fill="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.569-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.686" />
+                </svg>
+                WhatsApp API
+            </a>
         </div>
         <div class="navbar-end">
-            <!-- Theme Toggle -->
             <button id="theme-toggle" class="btn btn-ghost btn-circle mr-2" title="Toggle Theme">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -24,70 +29,126 @@
                         d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                 </svg>
             </button>
-            <div class="badge badge-primary badge-lg">QR Scan</div>
+            <div class="badge badge-primary">QR Scanner</div>
         </div>
     </div>
 
     <!-- Main Content -->
-    <div class="container mx-auto p-8">
-        <div class="hero min-h-[80vh]">
-            <div class="hero-content text-center">
-                <div class="max-w-md">
-                    <h1 class="text-5xl font-bold text-primary">Scan QR Code</h1>
-                    <p class="py-6 text-base-content/70">
-                        Scan the QR code below with your WhatsApp to connect your session.
+    <div class="hero min-h-[90vh]">
+        <div class="hero-content text-center">
+            <div class="max-w-lg">
+                <!-- Title -->
+                <div class="mb-8">
+                    <h1 class="text-4xl font-bold text-gray-800 mb-4">📱 Scan QR Code</h1>
+                    <p class="text-lg text-gray-600">
+                        Scan this QR code with your WhatsApp to connect your session
                     </p>
+                </div>
 
-                    <!-- QR Code Container -->
-                    <div class="card bg-base-100 shadow-xl">
-                        <div class="card-body items-center">
-                            <div id="qrcode" class="p-4 bg-white rounded-lg shadow-inner">
-                                <!-- QR Code will be inserted here -->
+                <!-- QR Code Container -->
+                <div class="card bg-white shadow-2xl border border-gray-100">
+                    <div class="card-body items-center">
+                        <!-- Loading State -->
+                        <div id="loading" class="flex flex-col items-center py-8">
+                            <div
+                                class="w-16 h-16 border-4 border-green-200 border-t-green-600 rounded-full animate-spin mb-4">
                             </div>
+                            <p class="text-gray-500">Loading QR Code...</p>
+                        </div>
 
-                            <!-- Loading State -->
-                            <div class="loading-container mt-4">
-                                <span class="loading loading-spinner loading-lg text-primary"></span>
-                                <p class="text-sm text-base-content/60 mt-2">Loading QR Code...</p>
-                            </div>
+                        <!-- QR Code -->
+                        <div id="qrcode" class="hidden p-6 bg-white rounded-xl"></div>
+
+                        <!-- Success Message -->
+                        <div id="success" class="hidden text-center py-8">
+                            <div class="text-6xl mb-4">✅</div>
+                            <h3 class="text-2xl font-bold text-green-600 mb-2">Connected!</h3>
+                            <p class="text-gray-600">Your WhatsApp session is now active</p>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Instructions -->
-                    <div class="alert alert-info mt-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            class="stroke-current shrink-0 w-6 h-6">
+                <!-- Instructions -->
+                <div class="mt-8 p-6 bg-white/70 backdrop-blur-sm rounded-2xl border border-white/20">
+                    <h3 class="font-bold text-gray-800 mb-3 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <div>
-                            <h3 class="font-bold">How to scan:</h3>
-                            <div class="text-xs">
-                                1. Open WhatsApp on your phone<br>
-                                2. Go to Settings > Linked Devices<br>
-                                3. Tap "Link a Device" and scan this QR code
-                            </div>
+                        How to Scan
+                    </h3>
+                    <div class="text-sm text-gray-600 space-y-2">
+                        <div class="flex items-center">
+                            <span
+                                class="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xs font-bold mr-3">1</span>
+                            Open WhatsApp on your phone
+                        </div>
+                        <div class="flex items-center">
+                            <span
+                                class="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xs font-bold mr-3">2</span>
+                            Go to Settings → Linked Devices
+                        </div>
+                        <div class="flex items-center">
+                            <span
+                                class="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xs font-bold mr-3">3</span>
+                            Tap "Link a Device" and scan this QR
                         </div>
                     </div>
+                </div>
+
+                <!-- Back Button -->
+                <div class="mt-6">
+                    <a href="/" class="btn btn-ghost text-gray-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                        Back to Dashboard
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 
-    <script type="text/javascript">
-        console.log('<%= qr %>')
-        let qr = '<%= qr %>'
-        let image = new Image()
-        image.src = qr
-        image.classList.add('rounded-lg', 'shadow-lg')
-        image.onload = function () {
-            // Hide loading state
-            document.querySelector('.loading-container').style.display = 'none'
+    <script>
+        // QR Code handling
+        const qr = '<%= qr %>';
+        const qrContainer = document.getElementById('qrcode');
+        const loading = document.getElementById('loading');
+        const success = document.getElementById('success');
+
+        if (qr) {
+            const image = new Image();
+            image.src = qr;
+            image.className = 'rounded-lg shadow-lg max-w-full h-auto';
+
+            image.onload = function () {
+                loading.classList.add('hidden');
+                qrContainer.classList.remove('hidden');
+                qrContainer.appendChild(image);
+
+                // Auto-refresh every 30 seconds for new QR
+                setTimeout(() => {
+                    window.location.reload();
+                }, 30000);
+            };
+
+            image.onerror = function () {
+                loading.innerHTML = `
+                    <div class="text-red-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 14.5c-.77.833.192 2.5 1.732 2.5z"/>
+                        </svg>
+                        <p>Failed to load QR Code</p>
+                        <button onclick="window.location.reload()" class="btn btn-sm btn-primary mt-2">Retry</button>
+                    </div>
+                `;
+            };
         }
-        document.getElementById('qrcode').appendChild(image)
     </script>
 
-    <!-- Scripts -->
     <script src="/p/js/theme-toggle.js"></script>
 </body>
 

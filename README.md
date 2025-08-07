@@ -1,57 +1,29 @@
-# WhatsApp API Gateway with Modern UI
+# 📱 WhatsApp API Gateway
 
-Easy Setup Headless multi session WhatsApp Gateway with NodeJS, featuring a modern web interface built with **Tailwind CSS** and **DaisyUI**.
+Simple and elegant WhatsApp API Gateway with modern web interface. Send messages, images, and documents programmatically with ease.
 
 ## ✨ Features
 
-- 🔄 **Multi Device Support** - Connect multiple WhatsApp accounts
-- 📱 **Multi Session** - Manage multiple phone numbers simultaneously  
-- ⚡ **Anti Delay Message** - Fast message delivery
-- 📤 **Bulk Messaging** - Send messages to multiple recipients
-- 🖼️ **Image Sending** - Send images with captions
-- 📄 **Document Sharing** - Send files and documents
-- 🎨 **Modern UI** - Beautiful web interface with Tailwind CSS & DaisyUI
-- 🌙 **Dark/Light Mode** - Theme switching with 29+ built-in themes
-- 📱 **Responsive Design** - Works on desktop, tablet, and mobile
-- 🔐 **QR Code Authentication** - Easy session setup with QR scanning
+- 🔄 **Multi Session Support** - Connect multiple WhatsApp accounts
+- 📱 **Multi Device** - Support for WhatsApp multi-device
+- 📤 **Message Sending** - Text, images, documents, and media
+- 🎨 **Modern UI** - Clean interface with Tailwind CSS & DaisyUI  
+- 🌙 **Dark/Light Mode** - Beautiful themes
+- 📱 **Responsive Design** - Works on all devices
+- 🔐 **QR Authentication** - Easy setup with QR scanning
+- ⚡ **Fast & Reliable** - Built for performance
 
-#### Based on [wa-multi-session](https://github.com/mimamch/wa-multi-session)
+## 🚀 Quick Start
 
-## 🛠️ Tech Stack
-
-- **Backend**: Express.js, Node.js
-- **Frontend**: EJS Templates, Tailwind CSS, DaisyUI
-- **WhatsApp**: wa-multi-session library
-- **Styling**: 29+ themes, responsive design, dark/light mode
-
-## 📋 Environment Variables
-
-Create a `.env` file in the root directory:
-
-```env
-# Server Configuration
-PORT=5001
-
-# Security Key
-KEY=mysupersecretkey
-```
-
-## 🚀 Installation & Setup
-
-### 1. Clone Repository
+### 1. Installation
 
 ```bash
 git clone https://github.com/ICT154/whatsapp-api.git
 cd whatsapp-api
-```
-
-### 2. Install Dependencies
-
-```bash
 npm install
 ```
 
-### 3. Environment Setup
+### 2. Environment Setup
 
 Create `.env` file:
 ```env
@@ -59,95 +31,179 @@ PORT=5001
 KEY=mysupersecretkey
 ```
 
-### 4. Build CSS (First Time)
+### 3. Run Application
 
 ```bash
-npm run build:css:once
-```
-
-### 5. Run Application
-
-#### Development Mode (Recommended)
-```bash
+# Development (with auto-reload)
 npm run dev
-```
-*Runs server with auto-reload and CSS watch mode*
 
-#### Production Mode
-```bash
+# Production
 npm start
 ```
 
-### 6. Access Dashboard
+### 4. Access Dashboard
 
-Open your browser and navigate to:
-```
-http://localhost:5001
-```
-
-## 🎯 Quick Start
-
-1. **Open Dashboard**: Visit `http://localhost:5001`
-2. **Create Session**: Click "Create New Session" or use the form
-3. **Scan QR Code**: Follow the link to scan QR with your WhatsApp
-4. **Start Messaging**: Use the API endpoints or web interface
-
-### 📤 Quick API Examples
-
-```bash
-# Send Text Message
-curl -X POST http://localhost:5001/send-message \
-  -H "Content-Type: application/json" \
-  -d '{"session":"main","to":"6281234567890","text":"Hello World!"}'
-
-# Send Image
-curl -X POST http://localhost:5001/send-image \
-  -H "Content-Type: application/json" \
-  -d '{"session":"main","to":"6281234567890","caption":"Nice image!","url":"https://example.com/image.jpg"}'
-
-# Send Document
-curl -X POST http://localhost:5001/send-document \
-  -H "Content-Type: application/json" \
-  -d '{"session":"main","to":"6281234567890","caption":"Document","url":"https://example.com/file.pdf","filename":"file.pdf"}'
-```
+Open: `http://localhost:5001`
 
 ## 📖 API Reference
 
 ### 🔑 Authentication
 
-All secure endpoints require the `KEY` parameter from your `.env` file.
+Use the `KEY` from your `.env` file for protected endpoints.
 
 ### 📱 Session Management
 
-#### Create New Session & Get QR Code (Web Interface)
+#### Create Session & Get QR Code
 
 ```http
 GET /start-session?session=SESSION_NAME&scan=true
 ```
 
-| Parameter | Type      | Description                              |
-| :-------- | :-------- | :--------------------------------------- |
-| `session` | `string`  | **Required**. Your unique session name   |
-| `scan`    | `boolean` | **Required**. Set to `true` for QR display |
-
-**Example:**
-```bash
-http://localhost:5001/start-session?session=main&scan=true
-```
-
-#### Create New Session & Get QR Code (API JSON Response)
+#### Delete Session
 
 ```http
-GET /start-session-api?session=SESSION_NAME
+GET /delete-session?session=SESSION_NAME&key=YOUR_KEY
 ```
 
-| Parameter | Type      | Description                              |
-| :-------- | :-------- | :--------------------------------------- |
-| `session` | `string`  | **Required**. Your unique session name   |
+#### Get All Sessions
 
-**Response:**
-```json
+```http
+GET /sessions?key=YOUR_KEY
+```
+
+### 📤 Send Messages
+
+#### Send Text Message
+
+```http
+POST /send-message
+Content-Type: application/json
+
 {
+  "session": "main",
+  "to": "6281234567890",
+  "text": "Hello World!"
+}
+```
+
+#### Send Image
+
+```http
+POST /send-image
+Content-Type: application/json
+
+{
+  "session": "main", 
+  "to": "6281234567890",
+  "caption": "Check this image!",
+  "url": "https://example.com/image.jpg"
+}
+```
+
+#### Send Document
+
+```http
+POST /send-document
+Content-Type: application/json
+
+{
+  "session": "main",
+  "to": "6281234567890", 
+  "caption": "Important document",
+  "url": "https://example.com/file.pdf",
+  "filename": "document.pdf"
+}
+```
+
+## � Quick Examples
+
+```bash
+# Create new session
+curl "http://localhost:5001/start-session?session=main&scan=true"
+
+# Send text message  
+curl -X POST http://localhost:5001/send-message \
+  -H "Content-Type: application/json" \
+  -d '{"session":"main","to":"6281234567890","text":"Hello!"}'
+
+# Check sessions
+curl "http://localhost:5001/sessions?key=mysupersecretkey"
+```
+
+## 🛠️ Tech Stack
+
+- **Backend**: Node.js, Express.js
+- **Frontend**: EJS, Tailwind CSS, DaisyUI
+- **WhatsApp**: wa-multi-session
+- **Styling**: Modern responsive design
+
+## 📱 Phone Number Format
+
+Use international format without '+' sign:
+- ✅ `6281234567890` (Indonesia)
+- ✅ `14155552671` (US)
+- ❌ `+62812345678901`
+- ❌ `081234567890`
+
+## 🔧 Development
+
+```bash
+# Install dependencies
+npm install
+
+# Build CSS (first time)
+npm run build:css:once
+
+# Development with auto-reload
+npm run dev
+
+# Build production CSS
+npm run build:css:dev
+```
+
+## 📂 Project Structure
+
+```
+whatsapp-api/
+├── app/
+│   ├── controllers/     # API logic
+│   ├── routers/         # Route definitions  
+│   └── middlewares/     # Custom middlewares
+├── public/             # Static assets
+├── views/              # EJS templates
+├── wa_credentials/     # WhatsApp session data
+└── utils/              # Helper functions
+```
+
+## ⚠️ Important Notes
+
+- **Session Data**: Stored in `wa_credentials/` directory
+- **Security**: Change the default `KEY` in production
+- **Webhooks**: Currently disabled for simplicity
+- **Rate Limiting**: Be mindful of WhatsApp's rate limits
+- **Phone Format**: Always use international format
+
+## 📄 License
+
+This project is licensed under the ISC License.
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open Pull Request
+
+## 💬 Support
+
+- 📧 Email: [Your Email]
+- 🐛 Issues: [GitHub Issues](https://github.com/ICT154/whatsapp-api/issues)
+- 📖 Docs: This README
+
+---
+
+**Built with ❤️ for the developer community**
   "status": true,
   "data": {
     "qr": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARQAAAEUCAYAAADqcMl5..."
