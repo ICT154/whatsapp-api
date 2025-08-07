@@ -70,23 +70,77 @@
   <!-- Hero Section -->
   <div class="hero min-h-[50vh] bg-gradient-to-r from-green-400 to-blue-500">
     <div class="hero-content text-center text-white">
-      <div class="max-w-md">
+      <div class="max-w-2xl">
         <h1 class="text-5xl font-bold mb-6">WhatsApp API Gateway</h1>
         <p class="text-xl mb-8 opacity-90">
-          Powerful and easy-to-use WhatsApp messaging API for your applications
+          Easy Setup Headless multi session WhatsApp Gateway with NodeJS, featuring a modern web interface built with
+          Tailwind CSS and DaisyUI
         </p>
-        <button class="btn btn-primary btn-lg mr-4">Get Started</button>
-        <button class="btn btn-outline btn-lg text-white border-white hover:bg-white hover:text-gray-800">
-          Documentation
-        </button>
+        <div class="flex flex-wrap justify-center gap-4">
+          <button class="btn btn-primary btn-lg" onclick="document.getElementById('quick-start').scrollIntoView()">Get
+            Started</button>
+          <button class="btn btn-outline btn-lg text-white border-white hover:bg-white hover:text-gray-800"
+            onclick="document.getElementById('api-docs').scrollIntoView()">
+            API Documentation
+          </button>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Main Content -->
   <div class="container mx-auto p-8">
+    <!-- Features Overview -->
+    <div class="mb-12">
+      <h2 class="text-4xl font-bold text-center mb-8">✨ Features</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="card bg-base-100 shadow-lg">
+          <div class="card-body text-center">
+            <div class="text-4xl mb-4">🔄</div>
+            <h3 class="font-bold">Multi Device Support</h3>
+            <p class="text-sm">Connect multiple WhatsApp accounts</p>
+          </div>
+        </div>
+        <div class="card bg-base-100 shadow-lg">
+          <div class="card-body text-center">
+            <div class="text-4xl mb-4">📱</div>
+            <h3 class="font-bold">Multi Session</h3>
+            <p class="text-sm">Manage multiple phone numbers simultaneously</p>
+          </div>
+        </div>
+        <div class="card bg-base-100 shadow-lg">
+          <div class="card-body text-center">
+            <div class="text-4xl mb-4">⚡</div>
+            <h3 class="font-bold">Anti Delay Message</h3>
+            <p class="text-sm">Fast message delivery</p>
+          </div>
+        </div>
+        <div class="card bg-base-100 shadow-lg">
+          <div class="card-body text-center">
+            <div class="text-4xl mb-4">📤</div>
+            <h3 class="font-bold">Bulk Messaging</h3>
+            <p class="text-sm">Send messages to multiple recipients</p>
+          </div>
+        </div>
+        <div class="card bg-base-100 shadow-lg">
+          <div class="card-body text-center">
+            <div class="text-4xl mb-4">🖼️</div>
+            <h3 class="font-bold">Image Sending</h3>
+            <p class="text-sm">Send images with captions</p>
+          </div>
+        </div>
+        <div class="card bg-base-100 shadow-lg">
+          <div class="card-body text-center">
+            <div class="text-4xl mb-4">📄</div>
+            <h3 class="font-bold">Document Sharing</h3>
+            <p class="text-sm">Send files and documents</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Stats -->
-    <div class="stats shadow w-full mb-8">
+    <div class="stats shadow w-full mb-12">
       <div class="stat">
         <div class="stat-figure text-primary">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -128,65 +182,49 @@
       </div>
     </div>
 
-    <!-- Feature Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-      <!-- Session Management -->
-      <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
+    <!-- Quick Start Section -->
+    <div id="quick-start" class="mb-12">
+      <h2 class="text-4xl font-bold text-center mb-8">🎯 Quick Start</h2>
+      <div class="card bg-base-100 shadow-xl">
         <div class="card-body">
-          <h2 class="card-title text-primary">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
-            </svg>
-            Session Management
-          </h2>
-          <p>Manage multiple WhatsApp sessions simultaneously with easy-to-use APIs.</p>
-          <div class="card-actions justify-end">
-            <button class="btn btn-primary btn-sm">Manage Sessions</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Message API -->
-      <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
-        <div class="card-body">
-          <h2 class="card-title text-secondary">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-            </svg>
-            Send Messages
-          </h2>
-          <p>Send text, images, documents, and more through WhatsApp with simple API calls.</p>
-          <div class="card-actions justify-end">
-            <button class="btn btn-secondary btn-sm">Send Message</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- QR Scanner -->
-      <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
-        <div class="card-body">
-          <h2 class="card-title text-accent">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
-            </svg>
-            QR Code Login
-          </h2>
-          <p>Quick and secure session authentication using QR codes.</p>
-          <div class="card-actions justify-end">
-            <button class="btn btn-accent btn-sm">Scan QR</button>
+          <div class="steps steps-vertical lg:steps-horizontal w-full">
+            <div class="step step-primary">
+              <div class="text-left">
+                <h3 class="font-bold">Install Dependencies</h3>
+                <div class="mockup-code mt-2">
+                  <pre><code>npm install</code></pre>
+                </div>
+              </div>
+            </div>
+            <div class="step step-primary">
+              <div class="text-left">
+                <h3 class="font-bold">Build CSS</h3>
+                <div class="mockup-code mt-2">
+                  <pre><code>npm run build:css:once</code></pre>
+                </div>
+              </div>
+            </div>
+            <div class="step step-primary">
+              <div class="text-left">
+                <h3 class="font-bold">Start Server</h3>
+                <div class="mockup-code mt-2">
+                  <pre><code>npm run dev</code></pre>
+                </div>
+              </div>
+            </div>
+            <div class="step step-primary">
+              <div class="text-left">
+                <h3 class="font-bold">Create Session</h3>
+                <p class="text-sm">Use the form below</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Quick Actions -->
-    <div class="card bg-base-100 shadow-xl">
+    <div class="card bg-base-100 shadow-xl mb-12">
       <div class="card-body">
         <h2 class="card-title text-2xl mb-6">Quick Actions</h2>
 
@@ -197,8 +235,8 @@
               <span class="label-text font-semibold">Create New Session</span>
             </label>
             <div class="input-group">
-              <input type="text" placeholder="Session name..." class="input input-bordered flex-1" />
-              <button class="btn btn-primary">Create</button>
+              <input id="session-name" type="text" placeholder="Session name..." class="input input-bordered flex-1" />
+              <button class="btn btn-primary" onclick="createSession()">Create</button>
             </div>
             <label class="label">
               <span class="label-text-alt">Enter a unique name for your WhatsApp session</span>
@@ -211,23 +249,358 @@
               <span class="label-text font-semibold">Send Test Message</span>
             </label>
             <div class="input-group">
-              <input type="tel" placeholder="Phone number..." class="input input-bordered flex-1" />
-              <button class="btn btn-secondary">Send</button>
+              <input id="phone-number" type="tel" placeholder="Phone number..." class="input input-bordered flex-1" />
+              <button class="btn btn-secondary" onclick="sendTestMessage()">Send</button>
             </div>
             <label class="label">
-              <span class="label-text-alt">Format: +62812345678 (include country code)</span>
+              <span class="label-text-alt">Format: 6281234567890 (include country code)</span>
             </label>
           </div>
         </div>
+      </div>
+    </div>
 
-        <!-- API Example -->
-        <div class="divider">API Example</div>
+    <!-- API Documentation -->
+    <div id="api-docs" class="mb-12">
+      <h2 class="text-4xl font-bold text-center mb-8">📖 API Documentation</h2>
 
+      <!-- Session Management -->
+      <div class="card bg-base-100 shadow-xl mb-8">
+        <div class="card-body">
+          <h3 class="card-title text-2xl mb-4">📱 Session Management</h3>
+
+          <!-- Create Session -->
+          <div class="collapse collapse-arrow bg-base-200 mb-4">
+            <input type="checkbox" />
+            <div class="collapse-title text-xl font-medium">
+              Create New Session & Get QR Code
+            </div>
+            <div class="collapse-content">
+              <div class="badge badge-success mb-2">GET</div>
+              <div class="mockup-code mb-4">
+                <pre><code>GET /start-session?session=SESSION_NAME&scan=true</code></pre>
+              </div>
+
+              <div class="overflow-x-auto">
+                <table class="table table-zebra w-full">
+                  <thead>
+                    <tr>
+                      <th>Parameter</th>
+                      <th>Type</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>session</code></td>
+                      <td>string</td>
+                      <td><strong>Required</strong>. Your unique session name</td>
+                    </tr>
+                    <tr>
+                      <td><code>scan</code></td>
+                      <td>boolean</td>
+                      <td><strong>Required</strong>. Set to <code>true</code> for QR display</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="alert alert-info mt-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                  class="stroke-current shrink-0 w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span><strong>Example:</strong> http://localhost:5001/start-session?session=main&scan=true</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Delete Session -->
+          <div class="collapse collapse-arrow bg-base-200 mb-4">
+            <input type="checkbox" />
+            <div class="collapse-title text-xl font-medium">
+              Delete Session
+            </div>
+            <div class="collapse-content">
+              <div class="badge badge-error mb-2">GET</div>
+              <div class="mockup-code mb-4">
+                <pre><code>GET /delete-session?session=SESSION_NAME</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- Get All Sessions -->
+          <div class="collapse collapse-arrow bg-base-200">
+            <input type="checkbox" />
+            <div class="collapse-title text-xl font-medium">
+              Get All Sessions
+            </div>
+            <div class="collapse-content">
+              <div class="badge badge-info mb-2">GET</div>
+              <div class="mockup-code mb-4">
+                <pre><code>GET /sessions?key=YOUR_SECRET_KEY</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Messaging -->
+      <div class="card bg-base-100 shadow-xl mb-8">
+        <div class="card-body">
+          <h3 class="card-title text-2xl mb-4">💬 Messaging</h3>
+
+          <!-- Send Text Message -->
+          <div class="collapse collapse-arrow bg-base-200 mb-4">
+            <input type="checkbox" />
+            <div class="collapse-title text-xl font-medium">
+              Send Text Message
+            </div>
+            <div class="collapse-content">
+              <div class="badge badge-primary mb-2">POST</div>
+              <div class="mockup-code mb-4">
+                <pre><code>POST /send-message
+Content-Type: application/json
+
+{
+  "session": "main",
+  "to": "6281234567890",
+  "text": "Hello from WhatsApp API!"
+}</code></pre>
+              </div>
+
+              <div class="overflow-x-auto">
+                <table class="table table-zebra w-full">
+                  <thead>
+                    <tr>
+                      <th>Body</th>
+                      <th>Type</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>session</code></td>
+                      <td>string</td>
+                      <td><strong>Required</strong>. Session name</td>
+                    </tr>
+                    <tr>
+                      <td><code>to</code></td>
+                      <td>string</td>
+                      <td><strong>Required</strong>. Phone number with country code</td>
+                    </tr>
+                    <tr>
+                      <td><code>text</code></td>
+                      <td>string</td>
+                      <td><strong>Required</strong>. Message content</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Send Image -->
+          <div class="collapse collapse-arrow bg-base-200 mb-4">
+            <input type="checkbox" />
+            <div class="collapse-title text-xl font-medium">
+              Send Image
+            </div>
+            <div class="collapse-content">
+              <div class="badge badge-primary mb-2">POST</div>
+              <div class="mockup-code mb-4">
+                <pre><code>POST /send-image
+Content-Type: application/json
+
+{
+  "session": "main",
+  "to": "6281234567890",
+  "caption": "Check out this image!",
+  "url": "https://example.com/image.jpg"
+}</code></pre>
+              </div>
+
+              <div class="overflow-x-auto">
+                <table class="table table-zebra w-full">
+                  <thead>
+                    <tr>
+                      <th>Body</th>
+                      <th>Type</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>session</code></td>
+                      <td>string</td>
+                      <td><strong>Required</strong>. Session name</td>
+                    </tr>
+                    <tr>
+                      <td><code>to</code></td>
+                      <td>string</td>
+                      <td><strong>Required</strong>. Phone number with country code</td>
+                    </tr>
+                    <tr>
+                      <td><code>caption</code></td>
+                      <td>string</td>
+                      <td><strong>Optional</strong>. Image caption/description</td>
+                    </tr>
+                    <tr>
+                      <td><code>url</code></td>
+                      <td>string</td>
+                      <td><strong>Required</strong>. Direct URL to the image file</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Send Document -->
+          <div class="collapse collapse-arrow bg-base-200 mb-4">
+            <input type="checkbox" />
+            <div class="collapse-title text-xl font-medium">
+              Send Document/File
+            </div>
+            <div class="collapse-content">
+              <div class="badge badge-primary mb-2">POST</div>
+              <div class="mockup-code mb-4">
+                <pre><code>POST /send-document
+Content-Type: application/json
+
+{
+  "session": "main",
+  "to": "6281234567890",
+  "caption": "Please check this document",
+  "url": "https://example.com/document.pdf",
+  "filename": "document.pdf"
+}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- Send Bulk Messages -->
+          <div class="collapse collapse-arrow bg-base-200">
+            <input type="checkbox" />
+            <div class="collapse-title text-xl font-medium">
+              Send Bulk Messages
+            </div>
+            <div class="collapse-content">
+              <div class="badge badge-primary mb-2">POST</div>
+              <div class="mockup-code mb-4">
+                <pre><code>POST /send-bulk-message
+Content-Type: application/json
+
+{
+  "session": "main",
+  "data": [
+    {
+      "to": "6281234567890",
+      "text": "Hello User 1!"
+    },
+    {
+      "to": "6289876543210", 
+      "text": "Hello User 2!"
+    }
+  ],
+  "delay": 3000
+}</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- cURL Examples -->
+      <div class="card bg-base-100 shadow-xl mb-8">
+        <div class="card-body">
+          <h3 class="card-title text-2xl mb-4">📤 cURL Examples</h3>
+
+          <div class="tabs tabs-boxed mb-4">
+            <button class="tab tab-active" data-tab="text-tab">Text Message</button>
+            <button class="tab" data-tab="image-tab">Image</button>
+            <button class="tab" data-tab="document-tab">Document</button>
+          </div>
+
+          <div id="text-tab" class="tab-content">
+            <div class="mockup-code">
+              <pre><code>curl -X POST http://localhost:5001/send-message \
+  -H "Content-Type: application/json" \
+  -d '{
+    "session": "main",
+    "to": "6281234567890",
+    "text": "Hello World!"
+  }'</code></pre>
+            </div>
+          </div>
+
+          <div id="image-tab" class="tab-content hidden">
+            <div class="mockup-code">
+              <pre><code>curl -X POST http://localhost:5001/send-image \
+  -H "Content-Type: application/json" \
+  -d '{
+    "session": "main",
+    "to": "6281234567890",
+    "caption": "Nice image!",
+    "url": "https://example.com/image.jpg"
+  }'</code></pre>
+            </div>
+          </div>
+
+          <div id="document-tab" class="tab-content hidden">
+            <div class="mockup-code">
+              <pre><code>curl -X POST http://localhost:5001/send-document \
+  -H "Content-Type: application/json" \
+  -d '{
+    "session": "main",
+    "to": "6281234567890",
+    "caption": "Document",
+    "url": "https://example.com/file.pdf",
+    "filename": "file.pdf"
+  }'</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Environment Setup -->
+    <div class="card bg-base-100 shadow-xl mb-12">
+      <div class="card-body">
+        <h3 class="card-title text-2xl mb-4">📋 Environment Setup</h3>
+        <p class="mb-4">Create a <code>.env</code> file in the root directory:</p>
         <div class="mockup-code">
-          <pre data-prefix="$"><code>curl -X POST http://localhost:5000/api/send-message</code></pre>
-          <pre data-prefix=">" class="text-warning"><code>-H "Content-Type: application/json"</code></pre>
-          <pre data-prefix=">"
-            class="text-success"><code>-d '{"session": "main", "to": "+6281234567890", "text": "Hello World!"}'</code></pre>
+          <pre><code># Server Configuration
+PORT=5001
+
+# Security Key
+KEY=mysupersecretkey</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tech Stack -->
+    <div class="card bg-base-100 shadow-xl mb-12">
+      <div class="card-body">
+        <h3 class="card-title text-2xl mb-4">🛠️ Tech Stack</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h4 class="font-bold mb-2">Backend</h4>
+            <ul class="list-disc list-inside space-y-1">
+              <li>Express.js</li>
+              <li>Node.js</li>
+              <li>wa-multi-session library</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-bold mb-2">Frontend</h4>
+            <ul class="list-disc list-inside space-y-1">
+              <li>EJS Templates</li>
+              <li>Tailwind CSS</li>
+              <li>DaisyUI (29+ themes)</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -258,6 +631,153 @@
 
   <!-- Scripts -->
   <script src="/p/js/theme-toggle.js"></script>
+
+  <script>
+    function initTabs() {
+      const tabButtons = document.querySelectorAll('.tab[data-tab]');
+
+      tabButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          const targetTab = this.dataset.tab;
+
+          document.querySelectorAll('.tab-content').forEach(content => {
+            content.classList.add('hidden');
+          });
+
+          tabButtons.forEach(tab => {
+            tab.classList.remove('tab-active');
+          });
+
+          document.getElementById(targetTab).classList.remove('hidden');
+          this.classList.add('tab-active');
+        });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      initTabs();
+    });
+
+    function createSession() {
+      const sessionName = document.getElementById('session-name').value;
+      if (!sessionName.trim()) {
+        alert('Please enter a session name');
+        return;
+      }
+
+      const url = `/start-session?session=${encodeURIComponent(sessionName)}&scan=true`;
+      window.open(url, '_blank');
+
+      // Show success message
+      const toast = document.createElement('div');
+      toast.className = 'toast toast-top toast-end';
+      toast.innerHTML = `
+        <div class="alert alert-success">
+          <span>Session "${sessionName}" is being created. Check the new tab for QR code.</span>
+        </div>
+      `;
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        document.body.removeChild(toast);
+      }, 3000);
+
+      document.getElementById('session-name').value = '';
+    }
+
+    // Send test message functionality
+    function sendTestMessage() {
+      const phoneNumber = document.getElementById('phone-number').value;
+      if (!phoneNumber.trim()) {
+        alert('Please enter a phone number');
+        return;
+      }
+
+      // Simple validation for phone number format
+      if (!/^\d{10,15}$/.test(phoneNumber.replace(/\D/g, ''))) {
+        alert('Please enter a valid phone number (10-15 digits)');
+        return;
+      }
+
+      const data = {
+        session: 'main', // Default session
+        to: phoneNumber,
+        text: 'Hello! This is a test message from WhatsApp API Gateway 👋'
+      };
+
+      fetch('/send-message', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      })
+        .then(response => response.json())
+        .then(result => {
+          if (result.status) {
+            // Show success message
+            const toast = document.createElement('div');
+            toast.className = 'toast toast-top toast-end';
+            toast.innerHTML = `
+            <div class="alert alert-success">
+              <span>Test message sent successfully to ${phoneNumber}!</span>
+            </div>
+          `;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+              document.body.removeChild(toast);
+            }, 3000);
+
+            document.getElementById('phone-number').value = '';
+          } else {
+            throw new Error(result.message || 'Failed to send message');
+          }
+        })
+        .catch(error => {
+          // Show error message
+          const toast = document.createElement('div');
+          toast.className = 'toast toast-top toast-end';
+          toast.innerHTML = `
+          <div class="alert alert-error">
+            <span>Error: ${error.message}</span>
+          </div>
+        `;
+          document.body.appendChild(toast);
+
+          setTimeout(() => {
+            document.body.removeChild(toast);
+          }, 3000);
+        });
+    }
+
+    // Add enter key support for forms
+    document.getElementById('session-name').addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        createSession();
+      }
+    });
+
+    document.getElementById('phone-number').addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        sendTestMessage();
+      }
+    });
+
+    // Smooth scrolling for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>
