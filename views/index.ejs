@@ -136,6 +136,13 @@
             <p class="text-sm">Send files and documents</p>
           </div>
         </div>
+        <div class="card bg-base-100 shadow-lg">
+          <div class="card-body text-center">
+            <div class="text-4xl mb-4">🎣</div>
+            <h3 class="font-bold">Webhooks</h3>
+            <p class="text-sm">Real-time event notifications</p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -228,7 +235,7 @@
       <div class="card-body">
         <h2 class="card-title text-2xl mb-6">Quick Actions</h2>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <!-- Create Session Form -->
           <div class="form-control">
             <label class="label">
@@ -254,6 +261,21 @@
             </div>
             <label class="label">
               <span class="label-text-alt">Format: 6281234567890 (include country code)</span>
+            </label>
+          </div>
+
+          <!-- Webhook Management -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text font-semibold">Add Webhook URL</span>
+            </label>
+            <div class="input-group">
+              <input id="webhook-url" type="url" placeholder="https://your-server.com/webhook"
+                class="input input-bordered flex-1" />
+              <button class="btn btn-accent" onclick="addWebhook()">Add</button>
+            </div>
+            <label class="label">
+              <span class="label-text-alt">Receive real-time event notifications</span>
             </label>
           </div>
         </div>
@@ -627,6 +649,131 @@ Content-Type: application/json
       </div>
     </div>
 
+    <!-- Webhooks -->
+    <div class="card bg-base-100 shadow-xl mb-12">
+      <div class="card-body">
+        <h3 class="card-title text-2xl mb-4">🎣 Webhooks</h3>
+        <p class="mb-6">Receive real-time notifications when events occur in your WhatsApp sessions.</p>
+
+        <!-- Webhook Management -->
+        <div class="collapse collapse-arrow bg-base-200 mb-4">
+          <input type="checkbox" />
+          <div class="collapse-title text-xl font-medium">
+            Add Webhook URL
+          </div>
+          <div class="collapse-content">
+            <div class="badge badge-primary mb-2">POST</div>
+            <div class="mockup-code mb-4">
+              <pre><code>POST /webhook/add
+Content-Type: application/json
+
+{
+  "url": "https://your-server.com/webhook",
+  "events": ["message", "qr", "ready", "disconnected"]
+}</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="collapse collapse-arrow bg-base-200 mb-4">
+          <input type="checkbox" />
+          <div class="collapse-title text-xl font-medium">
+            Get All Webhooks
+          </div>
+          <div class="collapse-content">
+            <div class="badge badge-info mb-2">GET</div>
+            <div class="mockup-code mb-4">
+              <pre><code>GET /webhook/list</code></pre>
+            </div>
+
+            <div class="alert alert-success mt-4">
+              <div>
+                <strong>Response Example:</strong>
+                <div class="mockup-code mt-2">
+                  <pre><code>{
+  "status": true,
+  "data": {
+    "webhooks": ["https://your-server.com/webhook"],
+    "isEnabled": true,
+    "supportedEvents": ["message", "qr", "ready"],
+    "totalWebhooks": 1
+  }
+}</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="collapse collapse-arrow bg-base-200 mb-4">
+          <input type="checkbox" />
+          <div class="collapse-title text-xl font-medium">
+            Enable/Disable Webhooks
+          </div>
+          <div class="collapse-content">
+            <div class="badge badge-primary mb-2">POST</div>
+            <div class="mockup-code mb-4">
+              <pre><code>POST /webhook/toggle
+Content-Type: application/json
+
+{
+  "enabled": true
+}</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="collapse collapse-arrow bg-base-200 mb-4">
+          <input type="checkbox" />
+          <div class="collapse-title text-xl font-medium">
+            Test Webhook
+          </div>
+          <div class="collapse-content">
+            <div class="badge badge-warning mb-2">POST</div>
+            <div class="mockup-code mb-4">
+              <pre><code>POST /webhook/test
+Content-Type: application/json
+
+{
+  "url": "https://your-server.com/webhook"
+}</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- Supported Events -->
+        <div class="mt-6">
+          <h4 class="font-bold text-lg mb-3">📡 Supported Events</h4>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+            <div class="badge badge-primary badge-lg">message</div>
+            <div class="badge badge-secondary badge-lg">qr</div>
+            <div class="badge badge-accent badge-lg">ready</div>
+            <div class="badge badge-success badge-lg">authenticated</div>
+            <div class="badge badge-warning badge-lg">auth_failure</div>
+            <div class="badge badge-error badge-lg">disconnected</div>
+          </div>
+        </div>
+
+        <!-- Payload Example -->
+        <div class="mt-6">
+          <h4 class="font-bold text-lg mb-3">📋 Webhook Payload Example</h4>
+          <div class="mockup-code">
+            <pre><code>{
+  "event": "message",
+  "timestamp": "2025-01-15T10:30:00.000Z",
+  "data": {
+    "sessionId": "main",
+    "from": "6281234567890@s.whatsapp.net",
+    "messageType": "conversation",
+    "body": "Hello World!",
+    "timestamp": 1642234200
+  }
+}</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Environment Setup -->
     <div class="card bg-base-100 shadow-xl mb-12">
       <div class="card-body">
@@ -813,6 +960,73 @@ KEY=mysupersecretkey</code></pre>
         });
     }
 
+    // Add webhook functionality
+    function addWebhook() {
+      const webhookUrl = document.getElementById('webhook-url').value;
+      if (!webhookUrl.trim()) {
+        alert('Please enter a webhook URL');
+        return;
+      }
+
+      // Simple URL validation
+      try {
+        new URL(webhookUrl);
+      } catch (error) {
+        alert('Please enter a valid URL (must start with http:// or https://)');
+        return;
+      }
+
+      const data = {
+        url: webhookUrl,
+        events: ['message', 'qr', 'ready', 'disconnected']
+      };
+
+      fetch('/webhook/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      })
+        .then(response => response.json())
+        .then(result => {
+          if (result.status) {
+            // Show success message
+            const toast = document.createElement('div');
+            toast.className = 'toast toast-top toast-end';
+            toast.innerHTML = `
+            <div class="alert alert-success">
+              <span>Webhook URL added successfully!</span>
+            </div>
+          `;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+              document.body.removeChild(toast);
+            }, 3000);
+
+            document.getElementById('webhook-url').value = '';
+          } else {
+            throw new Error(result.message || 'Failed to add webhook');
+          }
+        })
+        .catch(error => {
+          // Show error message
+          const toast = document.createElement('div');
+          toast.className = 'toast toast-top toast-end';
+          toast.innerHTML = `
+          <div class="alert alert-error">
+            <span>Error: ${error.message}</span>
+          </div>
+        `;
+          document.body.appendChild(toast);
+
+          setTimeout(() => {
+            document.body.removeChild(toast);
+          }, 3000);
+        });
+    }
+
     // Add enter key support for forms
     document.getElementById('session-name').addEventListener('keypress', function (e) {
       if (e.key === 'Enter') {
@@ -823,6 +1037,12 @@ KEY=mysupersecretkey</code></pre>
     document.getElementById('phone-number').addEventListener('keypress', function (e) {
       if (e.key === 'Enter') {
         sendTestMessage();
+      }
+    });
+
+    document.getElementById('webhook-url').addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        addWebhook();
       }
     });
 

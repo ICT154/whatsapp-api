@@ -298,6 +298,159 @@ Content-Type: application/json
 ### Available Themes
 `light`, `dark`, `cupcake`, `bumblebee`, `emerald`, `corporate`, `synthwave`, `retro`, `cyberpunk`, `valentine`, `halloween`, `garden`, `forest`, `aqua`, `lofi`, `pastel`, `fantasy`, `wireframe`, `black`, `luxury`, `dracula`, `cmyk`, `autumn`, `business`, `acid`, `lemonade`, `night`, `coffee`, `winter`
 
+## 🎣 Webhooks
+
+Webhooks allow you to receive real-time notifications when events occur in your WhatsApp sessions.
+
+### Supported Events
+- `message` - New message received
+- `qr` - QR code updated  
+- `ready` - Session connected
+- `authenticated` - Session authenticated
+- `auth_failure` - Authentication failed
+- `disconnected` - Session disconnected
+
+### Add Webhook URL
+
+```http
+POST /webhook/add
+Content-Type: application/json
+```
+
+```json
+{
+  "url": "https://your-server.com/webhook",
+  "events": ["message", "qr", "ready", "disconnected"]
+}
+```
+
+### Remove Webhook URL
+
+```http
+POST /webhook/remove
+Content-Type: application/json
+```
+
+```json
+{
+  "url": "https://your-server.com/webhook"
+}
+```
+
+### Get All Webhooks
+
+```http
+GET /webhook/list
+```
+
+**Response:**
+```json
+{
+  "status": true,
+  "data": {
+    "webhooks": ["https://your-server.com/webhook"],
+    "isEnabled": true,
+    "supportedEvents": ["message", "qr", "ready", "disconnected"],
+    "totalWebhooks": 1
+  }
+}
+```
+
+### Enable/Disable Webhooks
+
+```http
+POST /webhook/toggle
+Content-Type: application/json
+```
+
+```json
+{
+  "enabled": true
+}
+```
+
+### Test Webhook
+
+```http
+POST /webhook/test
+Content-Type: application/json
+```
+
+```json
+{
+  "url": "https://your-server.com/webhook"
+}
+```
+
+### Clear All Webhooks
+
+```http
+POST /webhook/clear
+```
+
+### Webhook Payload Format
+
+When an event occurs, your webhook URL will receive a POST request with this payload:
+
+```json
+{
+  "event": "message",
+  "timestamp": "2025-01-15T10:30:00.000Z",
+  "data": {
+    "sessionId": "main",
+    "from": "6281234567890@s.whatsapp.net",
+    "messageType": "conversation",
+    "body": "Hello World!",
+    "timestamp": 1642234200,
+    "key": {...},
+    "message": {...}
+  }
+}
+```
+
+#### Message Event Data
+```json
+{
+  "event": "message",
+  "timestamp": "2025-01-15T10:30:00.000Z", 
+  "data": {
+    "sessionId": "main",
+    "key": {...},
+    "message": {...},
+    "from": "6281234567890@s.whatsapp.net",
+    "timestamp": 1642234200,
+    "messageType": "conversation",
+    "body": "Hello World!"
+  }
+}
+```
+
+#### QR Code Event Data
+```json
+{
+  "event": "qr",
+  "timestamp": "2025-01-15T10:30:00.000Z",
+  "data": {
+    "sessionId": "main",
+    "qr": "data:image/png;base64,iVBORw...",
+    "status": "qr_updated"
+  }
+}
+```
+
+#### Session Ready Event Data
+```json
+{
+  "event": "ready",
+  "timestamp": "2025-01-15T10:30:00.000Z",
+  "data": {
+    "sessionId": "main",
+    "status": "connected",
+    "info": {...}
+  }
+}
+```
+
 ## 🛠️ Development
 
 ### NPM Scripts

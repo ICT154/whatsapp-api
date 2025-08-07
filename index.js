@@ -8,6 +8,7 @@ const path = require("path");
 const MainRouter = require("./app/routers");
 const errorHandlerMiddleware = require("./app/middlewares/error_middleware");
 const whatsapp = require("wa-multi-session");
+const { initializeWebhookListeners } = require("./app/controllers/webhook_controller");
 
 config();
 
@@ -44,5 +45,8 @@ whatsapp.onDisconnected((session) => {
 whatsapp.onConnecting((session) => {
   console.log("connecting => ", session);
 });
+
+// Initialize webhook listeners
+initializeWebhookListeners();
 
 whatsapp.loadSessionsFromStorage();

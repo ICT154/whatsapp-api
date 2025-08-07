@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const MessageRouter = require("./message_router");
 const SessionRouter = require("./session_router");
+const WebhookRouter = require("./webhook_router");
 
 const MainRouter = Router();
 
@@ -10,5 +11,6 @@ MainRouter.get("/", (req, res) => {
 
 MainRouter.use(SessionRouter);
 MainRouter.use(MessageRouter);
+MainRouter.use("/webhook", WebhookRouter);
 
 module.exports = MainRouter;
