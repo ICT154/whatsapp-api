@@ -1,4 +1,5 @@
 const whatsapp = require("wa-multi-session");
+const axios = require('axios');
 
 console.log('⚠️  Webhook functionality has been disabled');
 
@@ -9,7 +10,6 @@ function initializeWebhookListeners() {
     console.log('Only basic logging for incoming messages is enabled.');
     console.log('--------------------------------------------------');
 
-    // Listen for incoming messages and log details
     whatsapp.onMessageReceived(async (data) => {
         const jid = data.key?.remoteJid || "";
         if (jid.endsWith("@newsletter") || jid.endsWith("@g.us")) return;
@@ -28,6 +28,41 @@ function initializeWebhookListeners() {
         console.log(`JID        : ${jid}`);
         console.log(`Message    : ${message}`);
         console.log('-------------------\n');
+
+        try {
+            const response = await axios.post('https://luxeventplanner.com/api/attendace/check-in', {
+                contact: sender,
+                message: message
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            console.log('✅ Message forwarded to external API');
+            console.log('Response:', response.data);
+
+
+
+            if (response.data?.status === 'success') {
+                const replyMessage = response.data?.data?.reply;
+                if (replyMessage && sessionId && sessionId !== "unknown") {
+                    const receiver = sender + "@s.whatsapp.net";
+                    const isGroup = false;
+                    const text = replyMessage;
+                    await whatsapp.sendTextMessage({
+                        sessionId,
+                        to: receiver,
+                        isGroup,
+                        text,
+                    });
+                    console.log('📤 Reply sent to sender:', replyMessage);
+                    console.log('Session ID:', sessionId);
+                }
+            }
+        } catch (err) {
+            console.error('❌ Failed to forward message:', err.message);
+            console.error('Error details:', err.response ? err.response.data : err);
+        }
     });
 
     console.log('✅ Basic message listeners initialized (webhooks disabled)');
