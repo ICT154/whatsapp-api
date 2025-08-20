@@ -30,7 +30,14 @@ exports.sendMessage = async (req, res, next) => {
       })
     );
   } catch (error) {
-    next(error);
+    console.error("Error sending message:", error);
+    res.status(500).json({
+      status: false,
+      data: {
+        error: "Failed to send message",
+        details: error.message,
+      },
+    });
   }
 };
 
@@ -102,7 +109,14 @@ exports.sendImage = async (req, res, next) => {
     // }
 
   } catch (error) {
-    next(error);
+    console.error("Error sending image:", error);
+    res.status(500).json({
+      status: false,
+      data: {
+        error: "Failed to send image",
+        details: error.message,
+      },
+    });
   }
 };
 
@@ -140,7 +154,14 @@ exports.sendBulkMessage = async (req, res, next) => {
     }
     console.log("SEND BULK MESSAGE WITH DELAY SUCCESS");
   } catch (error) {
-    next(error);
+    console.error("Error sending bulk message:", error);
+    res.status(500).json({
+      status: false,
+      data: {
+        error: "Failed to send bulk message",
+        details: error.message,
+      },
+    });
   }
 };
 
@@ -194,7 +215,14 @@ exports.sendDocument = async (req, res, next) => {
       });
     }
   } catch (error) {
-    next(error);
+    console.error("Error sending document:", error);
+    res.status(500).json({
+      status: false,
+      data: {
+        error: "Failed to send document",
+        details: error.message,
+      },
+    });
   }
 };
 
