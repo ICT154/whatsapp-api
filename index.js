@@ -35,14 +35,23 @@ server.on("listening", () => console.log("APP IS RUNNING ON PORT " + PORT));
 server.listen(PORT);
 
 whatsapp.onConnected((session) => {
+  // Only log, do not trigger reconnect or disconnect here
   console.log("connected => ", session);
 });
 
 whatsapp.onDisconnected((session) => {
+  // Only log, do not trigger reconnect or disconnect here
   console.log("disconnected => ", session);
+  // If you want to auto-reconnect, add a guard to prevent infinite loops
+  // Example:
+  // if (!session._reconnectAttempted) {
+  //   session._reconnectAttempted = true;
+  //   whatsapp.connect(session.id);
+  // }
 });
 
 whatsapp.onConnecting((session) => {
+  // Only log, do not trigger reconnect or disconnect here
   console.log("connecting => ", session);
 });
 

@@ -12,7 +12,7 @@ function initializeWebhookListeners() {
 
     whatsapp.onMessageReceived(async (data) => {
         const jid = data.key?.remoteJid || "";
-        if (jid.endsWith("@newsletter") || jid.endsWith("@g.us")) return;
+        if (jid.endsWith("@newsletter")) return;
 
         const sessionId = data.sessionId || "unknown";
         const sender = jid.split("@")[0];
@@ -21,6 +21,83 @@ function initializeWebhookListeners() {
             data.message?.extendedTextMessage?.text ||
             "[No text content]";
 
+        // Skip messages from bot itself or system messages
+        if (data.key?.fromMe || sender === sessionId) return;
+
+        if (jid.endsWith("@g.us") && message.startsWith('.tagall')) {
+            try {
+                // Get the session socket to access group members
+                const session = whatsapp.getSession(sessionId);
+                if (session) {
+                    console.log('🔍 Getting group metadata for:', jid);
+                    const groupMetadata = await session.groupMetadata(jid);
+                    console.log('📊 Group metadata:', {
+                        id: groupMetadata.id,
+                        subject: groupMetadata.subject,
+                        participantsCount: groupMetadata.participants?.length || 0,
+                        participants: groupMetadata.participants?.slice(0, 3) // Show first 3 for debug
+                    });
+
+                    const groupMembers = groupMetadata.participants || [];
+
+                    if (groupMembers.length === 0) {
+                        console.log('❌ No participants found in group metadata');
+                        await session.sendMessage(jid, {
+                            text: '❌ Tidak dapat mengakses daftar member grup. Pastikan bot memiliki akses admin atau coba lagi.'
+                        });
+                        return;
+                    }
+
+                    // Debug: Show all members structure
+                    console.log('👥 All members raw data:', groupMembers.map(m => ({
+                        id: m.id,
+                        admin: m.admin,
+                        isSuperAdmin: m.isSuperAdmin
+                    })));
+
+                    // Filter valid members - Accept both @s.whatsapp.net and @lid formats
+                    const validMembers = groupMembers.filter(member => {
+                        const isValid = member.id &&
+                            (member.id.includes('@s.whatsapp.net') || member.id.includes('@lid')) &&
+                            member.id !== session.user?.id; // Exclude bot itself
+
+                        console.log(`🔍 Member ${member.id}: valid=${isValid}`);
+                        return isValid;
+                    }); console.log('✅ Valid members filtered:', validMembers.length);
+
+                    if (validMembers.length === 0) {
+                        await session.sendMessage(jid, {
+                            text: '❌ Tidak ada member yang dapat di-mention dalam grup ini.'
+                        });
+                        return;
+                    }
+
+                    // Create mention text with proper format
+                    let mentionText = '🔔 *Tag All Members*\n\n';
+                    validMembers.forEach(member => {
+                        const phoneNumber = member.id.split('@')[0];
+                        mentionText += `@${phoneNumber} `;
+                    });
+                    mentionText += '\n\n_Semua member telah di-mention!_';
+
+                    // Use session socket directly to send message with mentions
+                    await session.sendMessage(jid, {
+                        text: mentionText,
+                        mentions: validMembers.map(member => member.id)
+                    });
+
+                    console.log('📤 Tag all members message sent to group:', jid);
+                    console.log('👥 Total members tagged:', validMembers.length);
+                    console.log('📋 Member IDs:', validMembers.map(m => m.id));
+                } else {
+                    console.log('❌ Session not found for tagall command');
+                }
+            } catch (error) {
+                console.error('❌ Error in tagall command:', error.message);
+                console.error('❌ Stack trace:', error.stack);
+            }
+            return;
+        }
         console.log('📩 Incoming Message');
         console.log('-------------------');
         console.log(`Session ID : ${sessionId}`);
