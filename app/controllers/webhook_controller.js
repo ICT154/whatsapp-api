@@ -1,4 +1,6 @@
 const whatsapp = require("wa-multi-session");
+const { downloadMediaMessage } = require('@whiskeysockets/baileys');
+const sharp = require('sharp');
 const axios = require('axios');
 
 console.log('⚠️  Webhook functionality has been disabled');
@@ -24,6 +26,78 @@ function initializeWebhookListeners() {
         // Skip messages from bot itself or system messages
         if (data.key?.fromMe || sender === sessionId) return;
 
+        // Handle image to sticker conversion
+        if (data.message?.imageMessage && (message === '.sticker' || data.message?.imageMessage?.caption === '.sticker')) {
+            try {
+                const session = whatsapp.getSession(sessionId);
+                if (session) {
+                    console.log('🎨 Converting image to sticker for:', sender);
+
+                    try {
+                        // Download the image using baileys downloadMediaMessage with session
+                        const imageBuffer = await downloadMediaMessage(
+                            data,
+                            'buffer',
+                            {},
+                            {
+                                logger: console,
+                                reuploadRequest: session.updateMediaMessage
+                            }
+                        );
+
+                        if (imageBuffer && Buffer.isBuffer(imageBuffer)) {
+                            console.log('📥 Image downloaded successfully, size:', imageBuffer.length, 'bytes');
+
+                            try {
+                                // Convert image to WebP sticker format using sharp
+                                console.log('🔄 Converting image to WebP sticker format...');
+                                const stickerBuffer = await sharp(imageBuffer)
+                                    .webp({
+                                        quality: 50,
+                                        effort: 4
+                                    })
+                                    .resize(512, 512, {
+                                        fit: 'contain',
+                                        background: { r: 0, g: 0, b: 0, alpha: 0 }
+                                    })
+                                    .toBuffer();
+
+                                console.log('✅ Image converted to WebP, new size:', stickerBuffer.length, 'bytes');
+
+                                // Send as sticker back to sender
+                                const receiver = jid.endsWith("@g.us") ? jid : sender + "@s.whatsapp.net";
+
+                                // Send sticker with converted WebP buffer
+                                await session.sendMessage(receiver, {
+                                    sticker: stickerBuffer
+                                });
+
+                                console.log('✅ Sticker sent successfully to:', receiver);
+                                console.log('📱 Original sender:', sender);
+                                console.log('🏷️ Sticker created from image with .sticker caption');
+                            } catch (conversionError) {
+                                console.error('❌ Error converting image to WebP:', conversionError.message);
+                                console.error('❌ Conversion stack trace:', conversionError.stack);
+                            }
+                        } else {
+                            console.log('❌ Failed to download image or invalid buffer format');
+                            console.log('❌ Buffer type:', typeof imageBuffer);
+                            console.log('❌ Is Buffer:', Buffer.isBuffer(imageBuffer));
+                        }
+                    } catch (downloadError) {
+                        console.error('❌ Error downloading media:', downloadError.message);
+                        console.error('❌ Download stack trace:', downloadError.stack);
+                    }
+                } else {
+                    console.log('❌ Session not found for sticker conversion');
+                }
+            } catch (error) {
+                console.error('❌ Error converting image to sticker:', error.message);
+                console.error('❌ Stack trace:', error.stack);
+            }
+            return;
+        }
+
         if (jid.endsWith("@g.us") && message.startsWith('.tagall')) {
             try {
                 // Get the session socket to access group members
@@ -48,14 +122,12 @@ function initializeWebhookListeners() {
                         return;
                     }
 
-                    // Debug: Show all members structure
                     console.log('👥 All members raw data:', groupMembers.map(m => ({
                         id: m.id,
                         admin: m.admin,
                         isSuperAdmin: m.isSuperAdmin
                     })));
 
-                    // Filter valid members - Accept both @s.whatsapp.net and @lid formats
                     const validMembers = groupMembers.filter(member => {
                         const isValid = member.id &&
                             (member.id.includes('@s.whatsapp.net') || member.id.includes('@lid')) &&
@@ -72,7 +144,6 @@ function initializeWebhookListeners() {
                         return;
                     }
 
-                    // Create mention text with proper format
                     let mentionText = '🔔 *Tag All Members*\n\n';
                     validMembers.forEach(member => {
                         const phoneNumber = member.id.split('@')[0];
@@ -80,7 +151,6 @@ function initializeWebhookListeners() {
                     });
                     mentionText += '\n\n_Semua member telah di-mention!_';
 
-                    // Use session socket directly to send message with mentions
                     await session.sendMessage(jid, {
                         text: mentionText,
                         mentions: validMembers.map(member => member.id)
@@ -98,6 +168,9 @@ function initializeWebhookListeners() {
             }
             return;
         }
+
+
+
         console.log('📩 Incoming Message');
         console.log('-------------------');
         console.log(`Session ID : ${sessionId}`);
