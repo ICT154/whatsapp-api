@@ -187,6 +187,80 @@
             </div>
           </div>
         </div>
+
+        <!--  Send Bulk Message -->
+        <div class="card bg-base-100 shadow-lg">
+          <div class="card-body">
+            <h3 class="card-title text-orange-600">Send Bulk Message</h3>
+            <div class="mockup-code">
+              <pre data-prefix="$"><code>curl -X POST http://localhost:5001/send-bulk-message \</code></pre>
+              <pre data-prefix=""><code>  -H "Content-Type: application/json" \</code></pre>
+              <pre data-prefix=""><code>  -d '{
+        "session": "main",
+        "delay": 1000,
+        "data": [
+          { "to": "6281234567890", "text": "Hello!", "isGroup": false },
+          { "to": "6289876543210", "text": "Hi there!", "isGroup": false }
+        ]
+      }'</code></pre>
+            </div>
+            <div class="text-xs mt-2 text-gray-500">
+              <span class="font-bold">Note:</span> <code>data</code> is an array of objects. <code>delay</code> is in
+              milliseconds (default 1000ms).
+            </div>
+          </div>
+        </div>
+
+        <!-- Send Bulk Image -->
+        <div class="card bg-base-100 shadow-lg">
+          <div class="card-body">
+            <h3 class="card-title text-teal-600">Send Bulk Image</h3>
+            <div class="mockup-code">
+              <pre data-prefix="$"><code>curl -X POST http://localhost:5001/send-bulk-image \</code></pre>
+              <pre data-prefix=""><code>  -H "Content-Type: application/json" \</code></pre>
+              <pre data-prefix=""><code>  -d '{
+        "session": "main",
+        "delay": 1000,
+        "data": [
+          { "to": "6281234567890", "caption": "Nice!", "url": "https://example.com/image1.jpg" },
+          { "to": "6289876543210", "caption": "Great pic!", "url": "https://example.com/image2.jpg" }
+        ]
+            }'</code></pre>
+            </div>
+            <div class="text-xs mt-2 text-gray-500">
+              <span class="font-bold">Note:</span> <code>session</code> bisa dikirim lewat body, query, atau header.<br>
+              <code>data</code> adalah array berisi objek <code>to</code>, <code>caption</code>, dan
+              <code>url</code>.<br>
+              <code>delay</code> dalam milidetik (default 1000ms).
+            </div>
+          </div>
+        </div>
+
+        <!-- Send Bulk Document -->
+        <div class="card bg-base-100 shadow-lg">
+          <div class="card-body">
+            <h3 class="card-title text-indigo-600">Send Bulk Document</h3>
+            <div class="mockup-code">
+              <pre data-prefix="$"><code>curl -X POST http://localhost:5001/send-bulk-document \</code></pre>
+              <pre data-prefix=""><code>  -H "Content-Type: application/json" \</code></pre>
+              <pre data-prefix=""><code>  -d '{
+        "session": "main",
+        "delay": 1000,
+        "data": [
+          { "to": "6281234567890", "url": "https://example.com/doc1.pdf", "filename": "doc1.pdf", "isGroup": false },
+          { "to": "6289876543210", "url": "https://example.com/doc2.pdf", "filename": "doc2.pdf", "isGroup": false }
+        ]
+      }'</code></pre>
+            </div>
+            <div class="text-xs mt-2 text-gray-500">
+              <span class="font-bold">Note:</span> <code>data</code> is an array of objects. <code>delay</code> is in
+              milliseconds (default 1000ms).
+            </div>
+          </div>
+        </div>
+
+
+
       </div>
     </div>
 

@@ -15,34 +15,26 @@ exports.createSession = async (req, res, next) => {
       throw new Error("Bad Request");
     }
 
-    whatsapp.onQRUpdated(async (data) => {
-      if (res && !res.headersSent) {
+    // Only handle QR update once per request
+    const qrHandler = async (data) => {
+      if (res && !res.headersSent && data.sessionId == sessionName) {
         const qr = await toDataURL(data.qr);
-        if (data.sessionId == sessionName) {
-          // Check if request is from web browser (scan=true) or API call
-          const isWebRequest = scan === 'true' || req.headers.accept?.includes('text/html');
-
-          if (isWebRequest) {
-            // Web browser request - show HTML page with QR
-            res.render("scan", { qr: qr });
-          } else {
-            // API request - return JSON response
-            res.status(200).json(
-              responseSuccessWithData({
-                qr: qr,
-              })
-            );
-          }
+        const isWebRequest = scan === 'true' || req.headers.accept?.includes('text/html');
+        if (isWebRequest) {
+          res.render("scan", { qr: qr });
         } else {
-          // For other sessions, always return JSON
           res.status(200).json(
             responseSuccessWithData({
               qr: qr,
             })
           );
         }
+        // Remove listener after first response (if supported by wa-multi-session)
+        // If wa-multi-session does not support offQRUpdated, you may need to implement your own mechanism to ignore further calls.
       }
-    });
+    };
+
+    whatsapp.onQRUpdated(qrHandler);
     await whatsapp.startSession(sessionName, { printQR: true });
   } catch (error) {
     next(error);
@@ -71,7 +63,7 @@ exports.createSessionAPI = async (req, res, next) => {
         }
       }
     });
-    await whatsapp.startSession(sessionName, { printQR: true });
+    await whatsapp.startSession(sessionName, { printQR: false });
   } catch (error) {
     next(error);
   }

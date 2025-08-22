@@ -226,3 +226,97 @@ exports.sendDocument = async (req, res, next) => {
   }
 };
 
+// Send bulk image
+exports.sendBulkImage = async (req, res, next) => {
+  try {
+    const sessionId =
+      req.body.session || req.query.session || req.headers.session;
+    const delay = req.body.delay || req.query.delay || req.headers.delay;
+    if (!sessionId) {
+      return res.status(400).json({
+        status: false,
+        data: {
+          error: "Session Not Found",
+        },
+      });
+    }
+    res.status(200).json({
+      status: true,
+      data: {
+        message: "Bulk Image is Processing",
+      },
+    });
+    for (const dt of req.body.data) {
+      const to = dt.to;
+      const url = dt.url;
+      const caption = dt.caption;
+
+      await whatsapp.sendImage({
+        sessionId,
+        to: to,
+        url: url,
+        text: caption,
+      });
+      await whatsapp.createDelay(delay ?? 1000);
+    }
+    console.log("SEND BULK IMAGE WITH DELAY SUCCESS");
+  } catch (error) {
+    console.error("Error sending bulk image:", error);
+    res.status(500).json({
+      status: false,
+      data: {
+        error: "Failed to send bulk image",
+        details: error.message,
+      },
+    });
+  }
+};
+
+// Send bulk document
+exports.sendBulkDocument = async (req, res, next) => {
+  try {
+    const sessionId =
+      req.body.session || req.query.session || req.headers.session;
+    const delay = req.body.delay || req.query.delay || req.headers.delay;
+    if (!sessionId) {
+      return res.status(400).json({
+        status: false,
+        data: {
+          error: "Session Not Found",
+        },
+      });
+    }
+    res.status(200).json({
+      status: true,
+      data: {
+        message: "Bulk Document is Processing",
+      },
+    });
+    for (const dt of req.body.data) {
+      const to = dt.to;
+      const url = dt.url;
+      const caption = dt.caption;
+      const filename = dt.filename;
+
+      await whatsapp.sendDocument({
+        sessionId,
+        to: to,
+        media: url,
+        text: caption,
+        filename: filename,
+      });
+      await whatsapp.createDelay(delay ?? 1000);
+    }
+    console.log("SEND BULK DOCUMENT WITH DELAY SUCCESS");
+  } catch (error) {
+    console.error("Error sending bulk document:", error);
+    res.status(500).json({
+      status: false,
+      data: {
+        error: "Failed to send bulk document",
+        details: error.message,
+      },
+    });
+  }
+};
+
