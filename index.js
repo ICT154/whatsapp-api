@@ -20,9 +20,26 @@ process.on('uncaughtException', (error) => {
 });
 
 process.on('unhandledRejection', (reason, promise) => {
+  // Filter common WhatsApp/libsignal errors that are not critical
+  if (reason && reason.message && (
+    reason.message.includes('Connection Closed') ||
+    reason.message.includes('Socket timeout') ||
+    reason.message.includes('Bad MAC Error') ||
+    reason.message.includes('Key used already or never filled') ||
+    reason.message.includes('Failed to decrypt message')
+  )) {
+    return; // Skip logging these common non-critical errors
+  }
+
   console.error('🚨 Unhandled Rejection at:', promise);
   console.error('🚨 Reason:', reason);
   // Don't exit the process, just log the error
+
+  // Specifically handle Baileys timeout errors
+  if (reason && reason.message && reason.message.includes('Timed Out')) {
+    console.log('⏰ WhatsApp timeout detected - this is normal and will be handled automatically');
+    return; // Don't log full stack for normal timeouts
+  }
 });
 
 // Handle SIGTERM gracefully
@@ -70,17 +87,7 @@ whatsapp.onConnected((session) => {
 whatsapp.onDisconnected((session) => {
   try {
     console.log("❌ Disconnected => ", session);
-
-    // Optional: Auto-reconnect with exponential backoff
-    setTimeout(() => {
-      try {
-        console.log("🔄 Attempting to reconnect session:", session);
-        whatsapp.startSession(session);
-      } catch (reconnectError) {
-        console.error("❌ Failed to reconnect:", reconnectError.message);
-      }
-    }, 5000); // Wait 5 seconds before reconnecting
-
+    console.log("ℹ️ Session will need to be manually restarted if needed");
   } catch (error) {
     console.error("❌ Error in onDisconnected handler:", error.message);
   }
@@ -92,9 +99,7 @@ whatsapp.onConnecting((session) => {
   } catch (error) {
     console.error("❌ Error in onConnecting handler:", error.message);
   }
-});
-
-// Initialize webhook listeners
+});// Initialize webhook listeners
 initializeWebhookListeners();
 
 whatsapp.loadSessionsFromStorage();

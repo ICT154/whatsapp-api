@@ -13,27 +13,44 @@ function getSafeSession(sessionId) {
             console.warn(`⚠️ Session ${sessionId} not found or disconnected`);
             return null;
         }
-        return session;
+
+        // Check if session is actually connected
+        if (session.ws && session.ws.readyState === 1) {
+            return session;
+        } else {
+            console.warn(`⚠️ Session ${sessionId} exists but WebSocket not ready`);
+            return null;
+        }
     } catch (error) {
         console.error(`❌ Error getting session ${sessionId}:`, error.message);
         return null;
     }
 }
 
-// Safe message sender with retry logic
-async function safeSendMessage(session, jid, messageContent, retries = 3) {
+// Safe message sender with retry logic and rate limiting
+async function safeSendMessage(session, jid, messageContent, retries = 2) {
     for (let attempt = 1; attempt <= retries; attempt++) {
         try {
+            // Add small delay to prevent rate limiting
+            if (attempt > 1) {
+                await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
+            }
+
             await session.sendMessage(jid, messageContent);
             return true;
         } catch (error) {
             console.error(`❌ Send attempt ${attempt} failed:`, error.message);
+
+            // Don't retry on certain errors
+            if (error.message.includes('Timed Out') || error.message.includes('not-authorized')) {
+                console.error(`❌ Non-retryable error, stopping attempts`);
+                return false;
+            }
+
             if (attempt === retries) {
                 console.error(`❌ All ${retries} send attempts failed for ${jid}`);
                 return false;
             }
-            // Wait before retry (exponential backoff)
-            await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
         }
     }
     return false;
