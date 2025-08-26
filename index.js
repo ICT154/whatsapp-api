@@ -12,6 +12,41 @@ const { initializeWebhookListeners } = require("./app/controllers/webhook_contro
 
 config();
 
+// Global state tracking for sessions
+const sessionStates = new Map();
+
+// Session status constants
+const SESSION_STATUS = {
+  DISCONNECTED: 'disconnected',
+  CONNECTING: 'connecting',
+  CONNECTED: 'connected',
+  SYNCING: 'syncing',
+  READY: 'ready'
+};
+
+// Function to get session status
+function getSessionStatus(sessionId) {
+  return sessionStates.get(sessionId) || SESSION_STATUS.DISCONNECTED;
+}
+
+// Function to set session status
+function setSessionStatus(sessionId, status) {
+  sessionStates.set(sessionId, status);
+  console.log(`📱 Session ${sessionId}: ${status.toUpperCase()}`);
+}
+
+// Function to check if session is ready for operations
+function isSessionReady(sessionId) {
+  const status = getSessionStatus(sessionId);
+  return status === SESSION_STATUS.READY;
+}
+
+// Export functions for use in other modules
+global.getSessionStatus = getSessionStatus;
+global.setSessionStatus = setSessionStatus;
+global.isSessionReady = isSessionReady;
+global.SESSION_STATUS = SESSION_STATUS;
+
 // Global error handlers to prevent crashes
 process.on('uncaughtException', (error) => {
   console.error('🚨 Uncaught Exception:', error.message);
@@ -79,6 +114,11 @@ server.listen(PORT);
 whatsapp.onConnected((session) => {
   try {
     console.log("✅ Connected => ", session);
+    setSessionStatus(session, SESSION_STATUS.CONNECTED);
+    // Give some time for message sync to complete
+    setTimeout(() => {
+      setSessionStatus(session, SESSION_STATUS.READY);
+    }, 5000); // Wait 5 seconds after connection for sync
   } catch (error) {
     console.error("❌ Error in onConnected handler:", error.message);
   }
@@ -88,6 +128,7 @@ whatsapp.onDisconnected((session) => {
   try {
     console.log("❌ Disconnected => ", session);
     console.log("ℹ️ Session will need to be manually restarted if needed");
+    setSessionStatus(session, SESSION_STATUS.DISCONNECTED);
   } catch (error) {
     console.error("❌ Error in onDisconnected handler:", error.message);
   }
@@ -96,10 +137,13 @@ whatsapp.onDisconnected((session) => {
 whatsapp.onConnecting((session) => {
   try {
     console.log("🔄 Connecting => ", session);
+    setSessionStatus(session, SESSION_STATUS.CONNECTING);
   } catch (error) {
     console.error("❌ Error in onConnecting handler:", error.message);
   }
-});// Initialize webhook listeners
+});
+
+// Initialize webhook listeners
 initializeWebhookListeners();
 
 whatsapp.loadSessionsFromStorage();

@@ -132,6 +132,14 @@
                   </svg>
                   Check Active Sessions
                 </button>
+                <button onclick="checkDetailedStatus()" class="btn btn-primary w-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  Check Session Status
+                </button>
                 <button onclick="testEndpoint()" class="btn btn-sm btn-ghost w-full text-xs">
                   🔗 Test Endpoint Directly
                 </button>
@@ -386,6 +394,145 @@
         <div class="text-red-600 font-medium">🔴 Connection Error</div>
         <div class="text-sm text-gray-500 mt-1">${error.message}</div>
         <div class="text-xs text-gray-400 mt-2">Check if the server is running on port 5001</div>
+          </div>
+        `;
+      }
+    }
+
+    // Check detailed session status
+    async function checkDetailedStatus() {
+      const statusDiv = document.getElementById('sessionStatus');
+      const sessionName = document.getElementById('sessionName').value || 'main';
+
+      // Show loading state
+      statusDiv.innerHTML = `
+        <div class="flex items-center justify-center p-4">
+          <div class="loading loading-spinner loading-sm mr-2"></div>
+          <span class="text-gray-600">Checking session status...</span>
+        </div>
+      `;
+
+      try {
+        const response = await fetch('/session-status', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            session: sessionName
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('Session status response:', data);
+
+        if (data.status && data.data) {
+          const session = data.data;
+          let statusBadge = '';
+          let statusIcon = '';
+          let statusColor = '';
+
+          switch (session.status) {
+            case 'disconnected':
+              statusBadge = 'badge-error';
+              statusIcon = '❌';
+              statusColor = 'text-red-600';
+              break;
+            case 'connecting':
+              statusBadge = 'badge-warning';
+              statusIcon = '🔄';
+              statusColor = 'text-yellow-600';
+              break;
+            case 'connected':
+              statusBadge = 'badge-info';
+              statusIcon = '🔗';
+              statusColor = 'text-blue-600';
+              break;
+            case 'syncing':
+              statusBadge = 'badge-warning';
+              statusIcon = '⏳';
+              statusColor = 'text-orange-600';
+              break;
+            case 'ready':
+              statusBadge = 'badge-success';
+              statusIcon = '✅';
+              statusColor = 'text-green-600';
+              break;
+            default:
+              statusBadge = 'badge-neutral';
+              statusIcon = '❓';
+              statusColor = 'text-gray-600';
+          }
+
+          statusDiv.innerHTML = `
+            <div class="space-y-4">
+              <div class="text-center">
+                <div class="text-2xl mb-2">${statusIcon}</div>
+                <div class="font-bold ${statusColor} text-lg">${session.session_id}</div>
+                <div class="badge ${statusBadge} gap-2 mt-2">
+                  ${session.status.toUpperCase()}
+                </div>
+              </div>
+              
+              <div class="grid grid-cols-1 gap-2 text-sm">
+                <div class="flex justify-between">
+                  <span class="text-gray-500">Status:</span>
+                  <span class="font-medium">${session.message}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-500">Ready:</span>
+                  <span class="font-medium ${session.is_ready ? 'text-green-600' : 'text-red-600'}">
+                    ${session.is_ready ? 'Yes' : 'No'}
+                  </span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-500">Session Exists:</span>
+                  <span class="font-medium ${session.session_exists ? 'text-green-600' : 'text-red-600'}">
+                    ${session.session_exists ? 'Yes' : 'No'}
+                  </span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-500">Last Check:</span>
+                  <span class="font-medium text-xs">${new Date(session.timestamp).toLocaleTimeString()}</span>
+                </div>
+              </div>
+
+              ${!session.is_ready ? `
+                <div class="alert alert-warning text-sm">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-4 w-4" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                  </svg>
+                  <span>Session not ready for operations. Please wait.</span>
+                </div>
+              ` : `
+                <div class="alert alert-success text-sm">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-4 w-4" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>Session ready for all operations!</span>
+                </div>
+              `}
+            </div>
+          `;
+        } else {
+          statusDiv.innerHTML = `
+            <div class="text-center py-4">
+              <div class="text-red-600 font-medium">❌ Failed to get session status</div>
+              <div class="text-sm text-gray-500 mt-1">Server responded with error</div>
+            </div>
+          `;
+        }
+      } catch (error) {
+        console.error('Error fetching session status:', error);
+        statusDiv.innerHTML = `
+          <div class="text-center py-4">
+            <div class="text-red-600 font-medium">🔴 Connection Error</div>
+            <div class="text-sm text-gray-500 mt-1">${error.message}</div>
+            <div class="text-xs text-gray-400 mt-2">Check if the server is running</div>
           </div>
         `;
       }

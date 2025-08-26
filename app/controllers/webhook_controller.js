@@ -29,6 +29,15 @@ function getSafeSession(sessionId) {
 
 // Safe message sender with retry logic and rate limiting
 async function safeSendMessage(session, jid, messageContent, retries = 2) {
+    // Check if session is ready before sending
+    if (typeof global.isSessionReady === 'function') {
+        const sessionId = session.user?.id || 'main';
+        if (!global.isSessionReady(sessionId)) {
+            console.log(`⏳ Session ${sessionId} not ready, skipping message`);
+            return false;
+        }
+    }
+
     for (let attempt = 1; attempt <= retries; attempt++) {
         try {
             // Add small delay to prevent rate limiting

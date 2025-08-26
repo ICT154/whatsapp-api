@@ -132,3 +132,53 @@ exports.sessions = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.sessionStatus = async (req, res, next) => {
+  try {
+    const sessionId = req.body.session || req.query.session || req.headers.session || 'main';
+
+    // Check if session status functions are available
+    if (typeof global.getSessionStatus !== 'function') {
+      return res.status(500).json({
+        status: false,
+        message: 'Session status system not initialized'
+      });
+    }
+
+    const sessionStatus = global.getSessionStatus(sessionId);
+    const isReady = global.isSessionReady ? global.isSessionReady(sessionId) : false;
+    const sessionExists = whatsapp.getSession(sessionId);
+
+    let message = '';
+    switch (sessionStatus) {
+      case global.SESSION_STATUS?.DISCONNECTED:
+        message = 'Session tidak tersambung';
+        break;
+      case global.SESSION_STATUS?.CONNECTING:
+        message = 'Session sedang menghubungkan';
+        break;
+      case global.SESSION_STATUS?.CONNECTED:
+        message = 'Session tersambung, sedang mempersiapkan';
+        break;
+      case global.SESSION_STATUS?.SYNCING:
+        message = 'Session sedang menyinkronkan pesan';
+        break;
+      case global.SESSION_STATUS?.READY:
+        message = 'Session siap digunakan';
+        break;
+      default:
+        message = 'Status session tidak diketahui';
+    }
+
+    res.status(200).json(responseSuccessWithData({
+      session_id: sessionId,
+      status: sessionStatus,
+      is_ready: isReady,
+      session_exists: !!sessionExists,
+      message: message,
+      timestamp: new Date().toISOString()
+    }));
+  } catch (error) {
+    next(error);
+  }
+};
