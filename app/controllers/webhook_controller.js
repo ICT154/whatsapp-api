@@ -76,7 +76,9 @@ function initializeWebhookListeners() {
     whatsapp.onMessageReceived(async (data) => {
         try {
             const jid = data.key?.remoteJid || "";
-            if (jid.endsWith("@newsletter")) return;
+            if (jid.endsWith("@g.us") || jid.endsWith("@newsletter")) return;
+            if (data.key?.fromMe) return;
+
 
             const sessionId = data.sessionId || "unknown";
             const sender = jid.split("@")[0];
@@ -88,155 +90,6 @@ function initializeWebhookListeners() {
             // Skip messages from bot itself or system messages
             if (data.key?.fromMe || sender === sessionId) return;
 
-            // Handle image to sticker conversion
-            if (data.message?.imageMessage && (message === '.sticker' || data.message?.imageMessage?.caption === '.sticker')) {
-                try {
-                    const session = getSafeSession(sessionId);
-                    if (session) {
-                        console.log('🎨 Converting image to sticker for:', sender);
-
-                        try {
-                            // Download the image using baileys downloadMediaMessage with session
-                            const imageBuffer = await downloadMediaMessage(
-                                data,
-                                'buffer',
-                                {},
-                                {
-                                    logger: console,
-                                    reuploadRequest: session.updateMediaMessage
-                                }
-                            );
-
-                            if (imageBuffer && Buffer.isBuffer(imageBuffer)) {
-                                console.log('📥 Image downloaded successfully, size:', imageBuffer.length, 'bytes');
-
-                                try {
-                                    // Convert image to WebP sticker format using sharp
-                                    console.log('🔄 Converting image to WebP sticker format...');
-                                    const stickerBuffer = await sharp(imageBuffer)
-                                        .webp({
-                                            quality: 50,
-                                            effort: 4
-                                        })
-                                        .resize(512, 512, {
-                                            fit: 'contain',
-                                            background: { r: 0, g: 0, b: 0, alpha: 0 }
-                                        })
-                                        .toBuffer();
-
-                                    console.log('✅ Image converted to WebP, new size:', stickerBuffer.length, 'bytes');
-
-                                    // Send as sticker back to sender
-                                    const receiver = jid.endsWith("@g.us") ? jid : sender + "@s.whatsapp.net";
-
-                                    // Send sticker with converted WebP buffer
-                                    const stickerSent = await safeSendMessage(session, receiver, {
-                                        sticker: stickerBuffer
-                                    });
-
-                                    if (stickerSent) {
-                                        console.log('✅ Sticker sent successfully to:', receiver);
-                                        console.log('📱 Original sender:', sender);
-                                        console.log('🏷️ Sticker created from image with .sticker caption');
-                                    } else {
-                                        console.log('❌ Failed to send sticker after retries');
-                                    }
-                                } catch (conversionError) {
-                                    console.error('❌ Error converting image to WebP:', conversionError.message);
-                                    console.error('❌ Conversion stack trace:', conversionError.stack);
-                                }
-                            } else {
-                                console.log('❌ Failed to download image or invalid buffer format');
-                                console.log('❌ Buffer type:', typeof imageBuffer);
-                                console.log('❌ Is Buffer:', Buffer.isBuffer(imageBuffer));
-                            }
-                        } catch (downloadError) {
-                            console.error('❌ Error downloading media:', downloadError.message);
-                            console.error('❌ Download stack trace:', downloadError.stack);
-                        }
-                    } else {
-                        console.log('❌ Session not found for sticker conversion');
-                    }
-                } catch (error) {
-                    console.error('❌ Error converting image to sticker:', error.message);
-                    console.error('❌ Stack trace:', error.stack);
-                }
-                return;
-            }
-
-            if (jid.endsWith("@g.us") && message.startsWith('.tagall')) {
-                try {
-                    // Get the session socket to access group members
-                    const session = getSafeSession(sessionId);
-                    if (session) {
-                        console.log('🔍 Getting group metadata for:', jid);
-                        const groupMetadata = await session.groupMetadata(jid);
-                        console.log('📊 Group metadata:', {
-                            id: groupMetadata.id,
-                            subject: groupMetadata.subject,
-                            participantsCount: groupMetadata.participants?.length || 0,
-                            participants: groupMetadata.participants?.slice(0, 3) // Show first 3 for debug
-                        });
-
-                        const groupMembers = groupMetadata.participants || [];
-
-                        if (groupMembers.length === 0) {
-                            console.log('❌ No participants found in group metadata');
-                            await session.sendMessage(jid, {
-                                text: '❌ Tidak dapat mengakses daftar member grup. Pastikan bot memiliki akses admin atau coba lagi.'
-                            });
-                            return;
-                        }
-
-                        console.log('👥 All members raw data:', groupMembers.map(m => ({
-                            id: m.id,
-                            admin: m.admin,
-                            isSuperAdmin: m.isSuperAdmin
-                        })));
-
-                        const validMembers = groupMembers.filter(member => {
-                            const isValid = member.id &&
-                                (member.id.includes('@s.whatsapp.net') || member.id.includes('@lid')) &&
-                                member.id !== session.user?.id; // Exclude bot itself
-
-                            console.log(`🔍 Member ${member.id}: valid=${isValid}`);
-                            return isValid;
-                        }); console.log('✅ Valid members filtered:', validMembers.length);
-
-                        if (validMembers.length === 0) {
-                            await session.sendMessage(jid, {
-                                text: '❌ Tidak ada member yang dapat di-mention dalam grup ini.'
-                            });
-                            return;
-                        }
-
-                        let mentionText = '🔔 *Tag All Members*\n\n';
-                        validMembers.forEach(member => {
-                            const phoneNumber = member.id.split('@')[0];
-                            mentionText += `@${phoneNumber} `;
-                        });
-                        mentionText += '\n\n_Semua member telah di-mention!_';
-
-                        await session.sendMessage(jid, {
-                            text: mentionText,
-                            mentions: validMembers.map(member => member.id)
-                        });
-
-                        console.log('📤 Tag all members message sent to group:', jid);
-                        console.log('👥 Total members tagged:', validMembers.length);
-                        console.log('📋 Member IDs:', validMembers.map(m => m.id));
-                    } else {
-                        console.log('❌ Session not found for tagall command');
-                    }
-                } catch (error) {
-                    console.error('❌ Error in tagall command:', error.message);
-                    console.error('❌ Stack trace:', error.stack);
-                }
-                return;
-            }
-
-
-
             console.log('📩 Incoming Message');
             console.log('-------------------');
             console.log(`Session ID : ${sessionId}`);
@@ -246,7 +99,7 @@ function initializeWebhookListeners() {
             console.log('-------------------\n');
 
             try {
-                const response = await axios.post('https://luxeventplanner.com/api/attendace/check-in', {
+                const response = await axios.post('https://luxeventplanner.com/api/attendance/check-in', {
                     contact: sender,
                     message: message
                 }, {
