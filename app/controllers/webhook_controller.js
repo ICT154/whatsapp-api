@@ -99,35 +99,72 @@ function initializeWebhookListeners() {
             console.log('-------------------\n');
 
             try {
-                const response = await axios.post('https://luxeventplanner.com/api/attendance/check-in', {
-                    contact: sender,
-                    message: message
-                }, {
-                    headers: {
-                        'Content-Type': 'application/json'
+                const apiUrl = 'https://luxeventplanner.com/api/rsvp/whatsapp/response';
+                const payload = {
+                    number: sender,
+                    response: (message || '').toString().trim().toLowerCase()
+                };
+
+                let replyText = null;
+
+                try {
+                    const apiRes = await axios.post(apiUrl, payload, {
+                        headers: { 'Content-Type': 'application/json' },
+                        timeout: 10000
+                    });
+
+                    console.log('✅ RSVP API response:', apiRes.status, apiRes.data);
+
+                    if (apiRes.status === 200 && apiRes.data?.status === 'success') {
+                        replyText = apiRes.data?.message || '✅ Response saved successfully.';
+                    } else {
+                        replyText = apiRes.data?.message || '❌ An error occurred while checking in.';
                     }
-                });
-                console.log('✅ Message forwarded to external API');
-                console.log('Response:', response.data);
-
-
-
-                if (response.data?.status === 'success') {
-                    const replyMessage = response.data?.data?.reply;
-                    if (replyMessage && sessionId && sessionId !== "unknown") {
-                        const receiver = sender + "@s.whatsapp.net";
-                        const isGroup = false;
-                        const text = replyMessage;
-                        await whatsapp.sendTextMessage({
-                            sessionId,
-                            to: receiver,
-                            isGroup,
-                            text,
-                        });
-                        console.log('📤 Reply sent to sender:', replyMessage);
-                        console.log('Session ID:', sessionId);
+                } catch (apiErr) {
+                    // Handle non-2xx responses and network errors
+                    const errResp = apiErr.response;
+                    if (errResp) {
+                        console.warn('⚠️ RSVP API returned error:', errResp.status, errResp.data);
+                        if (errResp.status === 400) {
+                            replyText = (errResp.data && errResp.data.message) || '❌ Missing required fields: number or response.';
+                        } else if (errResp.status === 404) {
+                            replyText = (errResp.data && errResp.data.message) || '❌ Guest not found.';
+                        } else {
+                            replyText = (errResp.data && errResp.data.message) || '❌ An error occurred while checking in.';
+                        }
+                    } else {
+                        console.error('❌ Network/timeout error calling RSVP API:', apiErr.message);
+                        replyText = '❌ An error occurred while checking in.';
                     }
                 }
+
+                // const response = await axios.post('https://luxeventplanner.com/api/attendance/check-in', {
+                //     contact: sender,
+                //     message: message
+                // }, {
+                //     headers: {
+                //         'Content-Type': 'application/json'
+                //     }
+                // });
+                // console.log('✅ Message forwarded to external API');
+                // console.log('Response:', response.data);
+
+                // if (response.data?.status === 'success') {
+                //     const replyMessage = response.data?.data?.reply;
+                //     if (replyMessage && sessionId && sessionId !== "unknown") {
+                //         const receiver = sender + "@s.whatsapp.net";
+                //         const isGroup = false;
+                //         const text = replyMessage;
+                //         await whatsapp.sendTextMessage({
+                //             sessionId,
+                //             to: receiver,
+                //             isGroup,
+                //             text,
+                //         });
+                //         console.log('📤 Reply sent to sender:', replyMessage);
+                //         console.log('Session ID:', sessionId);
+                //     }
+                // }
             } catch (err) {
                 console.error('❌ Failed to forward message:', err.message);
                 console.error('Error details:', err.response ? err.response.data : err);
