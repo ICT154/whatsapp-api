@@ -25,7 +25,7 @@
     "express": "^4.21.2",
     "http-errors": "~1.6.3",
     "moment": "^2.29.4",
-    "morgan": "~1.9.1",
+    "morgan": "^1.10.1",
     "qrcode": "^1.5.1",
     "sharp": "^0.32.6",
     "wa-multi-session": "^3.3.1",

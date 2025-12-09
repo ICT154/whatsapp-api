@@ -26,19 +26,24 @@ function sessionStatusMiddleware(req, res, next) {
             switch (sessionStatus) {
                 case global.SESSION_STATUS.DISCONNECTED:
                     message = 'Session belum tersambung. Silakan scan QR code terlebih dahulu.';
+                    message += ` Data: ${JSON.stringify(global.getSessionData ? global.getSessionData(sessionId) : {})}`;
                     statusCode = 400;
                     break;
                 case global.SESSION_STATUS.CONNECTING:
                     message = 'Session sedang menghubungkan ke WhatsApp. Harap tunggu beberapa saat.';
+                    message += ` Data: ${JSON.stringify(global.getSessionData ? global.getSessionData(sessionId) : {})}`;
                     break;
                 case global.SESSION_STATUS.CONNECTED:
                     message = 'Session baru saja tersambung, sedang mempersiapkan sistem. Harap tunggu sebentar.';
+                    message += ` Data: ${JSON.stringify(global.getSessionData ? global.getSessionData(sessionId) : {})}`;
                     break;
                 case global.SESSION_STATUS.SYNCING:
                     message = 'Session sedang menyinkronkan pesan. Harap tunggu hingga proses selesai.';
+                    message += ` Data: ${JSON.stringify(global.getSessionData ? global.getSessionData(sessionId) : {})}`;
                     break;
                 default:
                     message = 'Session belum siap untuk operasi. Harap tunggu beberapa saat.';
+                    message += ` Data: ${JSON.stringify(global.getSessionData ? global.getSessionData(sessionId) : {})}`;
             }
 
             return res.status(statusCode).json({
