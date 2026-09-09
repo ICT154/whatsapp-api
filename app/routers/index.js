@@ -1,12 +1,16 @@
 const { Router } = require("express");
 const MessageRouter = require("./message_router");
 const SessionRouter = require("./session_router");
+const AuthRouter = require("./auth_router");
+const { requireUIAuth } = require("../middlewares/auth_middleware");
 // const WebhookRouter = require("./webhook_router"); // Disabled
 
 const MainRouter = Router();
 
-MainRouter.get("/", (req, res) => {
-    res.render("index");
+MainRouter.use(AuthRouter);
+
+MainRouter.get("/", requireUIAuth, (req, res) => {
+  res.render("index", { user: req.user, apiKey: process.env.KEY || "" });
 });
 
 MainRouter.use(SessionRouter);

@@ -1,5 +1,6 @@
 const whatsapp = require("wa-multi-session");
 const ValidationError = require("../../utils/error");
+const logger = require("../../utils/logger");
 const { responseSuccessWithData } = require("../../utils/response");
 
 exports.sendMessage = async (req, res, next) => {
@@ -27,10 +28,10 @@ exports.sendMessage = async (req, res, next) => {
         status: send?.status,
         message: send?.message?.extendedTextMessage?.text || "Not Text",
         remoteJid: send?.key?.remoteJid,
-      })
+      }),
     );
   } catch (error) {
-    console.error("Error sending message:", error);
+    logger.error("Error sending message:", error);
     res.status(500).json({
       status: false,
       data: {
@@ -107,9 +108,8 @@ exports.sendImage = async (req, res, next) => {
     //     },
     //   });
     // }
-
   } catch (error) {
-    console.error("Error sending image:", error);
+    logger.error("Error sending image:", error);
     res.status(500).json({
       status: false,
       data: {
@@ -152,9 +152,9 @@ exports.sendBulkMessage = async (req, res, next) => {
       });
       await whatsapp.createDelay(delay ?? 1000);
     }
-    console.log("SEND BULK MESSAGE WITH DELAY SUCCESS");
+    logger.info(`Bulk message completed for session '${sessionId}'`);
   } catch (error) {
-    console.error("Error sending bulk message:", error);
+    logger.error("Error sending bulk message:", error);
     res.status(500).json({
       status: false,
       data: {
@@ -173,7 +173,8 @@ exports.sendDocument = async (req, res, next) => {
     const url = req.body.url || req.query.url;
     const sessionId =
       req.body.session || req.query.session || req.headers.session;
-    const filename = req.body.filename || req.query.filename || req.headers.filename;
+    const filename =
+      req.body.filename || req.query.filename || req.headers.filename;
 
     if (!to || !url) {
       return res.status(400).json({
@@ -215,7 +216,7 @@ exports.sendDocument = async (req, res, next) => {
       });
     }
   } catch (error) {
-    console.error("Error sending document:", error);
+    logger.error("Error sending document:", error);
     res.status(500).json({
       status: false,
       data: {
@@ -259,9 +260,9 @@ exports.sendBulkImage = async (req, res, next) => {
       });
       await whatsapp.createDelay(delay ?? 1000);
     }
-    console.log("SEND BULK IMAGE WITH DELAY SUCCESS");
+    logger.info(`Bulk image completed for session '${sessionId}'`);
   } catch (error) {
-    console.error("Error sending bulk image:", error);
+    logger.error("Error sending bulk image:", error);
     res.status(500).json({
       status: false,
       data: {
@@ -307,9 +308,9 @@ exports.sendBulkDocument = async (req, res, next) => {
       });
       await whatsapp.createDelay(delay ?? 1000);
     }
-    console.log("SEND BULK DOCUMENT WITH DELAY SUCCESS");
+    logger.info(`Bulk document completed for session '${sessionId}'`);
   } catch (error) {
-    console.error("Error sending bulk document:", error);
+    logger.error("Error sending bulk document:", error);
     res.status(500).json({
       status: false,
       data: {
@@ -319,4 +320,3 @@ exports.sendBulkDocument = async (req, res, next) => {
     });
   }
 };
-

@@ -10,48 +10,48 @@
 
 <body class="min-h-screen bg-base-200">
   <!-- Header -->
-  <div class="navbar bg-base-100 shadow-lg">
+  <div class="navbar bg-base-100 shadow-sm border-b border-base-300 px-4">
     <div class="navbar-start">
-      <a class="btn btn-ghost text-xl font-bold">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-green-600" fill="currentColor"
-          viewBox="0 0 24 24">
-          <path
-            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.569-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.686" />
+      <a href="/" class="btn btn-ghost text-lg font-bold flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.569-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.686" />
         </svg>
-        WhatsApp API
+        <span>WhatsApp Gateway</span>
       </a>
     </div>
-    <div class="navbar-end">
-      <div class="badge badge-success gap-2">
-        <div class="w-2 h-2 bg-green-100 rounded-full animate-pulse"></div>
+    <div class="navbar-end flex items-center gap-2">
+      <div class="badge badge-success badge-sm gap-1.5 font-medium py-2.5">
+        <span class="w-1.5 h-1.5 bg-white rounded-full"></span>
         Online
       </div>
-      <button id="theme-toggle" class="btn btn-ghost btn-circle ml-2" title="Toggle Theme">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+      <button id="theme-toggle" class="btn btn-ghost btn-circle btn-sm" title="Ganti Tema">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
         </svg>
       </button>
+      <a href="/logout" class="btn btn-outline btn-sm gap-1.5 ml-2 font-medium" title="Keluar">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+        </svg>
+        <span>Logout</span>
+      </a>
     </div>
   </div>
 
   <!-- Hero Section -->
-  <div class="hero min-h-[60vh] bg-gradient-to-br from-green-500 to-emerald-600">
-    <div class="hero-content text-center">
-      <div class="max-w-2xl text-white">
-        <h1 class="text-5xl font-bold mb-6">📱 WhatsApp API Gateway</h1>
-        <p class="text-xl mb-8 opacity-90">
-          Simple and elegant WhatsApp API Gateway. Send messages, images, and documents programmatically with ease.
-        </p>
-        <div class="flex flex-wrap justify-center gap-4">
-          <a href="#session-management" class="btn btn-lg bg-white text-green-600 hover:bg-gray-100 border-none">
-            Get Started
-          </a>
-          <a href="#api-reference"
-            class="btn btn-lg btn-outline text-white border-white hover:bg-white hover:text-green-600">
-            API Docs
-          </a>
-        </div>
+  <div class="bg-gradient-to-r from-emerald-700 to-teal-800 text-white py-12 px-4 shadow-inner">
+    <div class="max-w-5xl mx-auto text-center">
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mb-3">WhatsApp API Gateway</h1>
+      <p class="text-base sm:text-lg opacity-90 max-w-2xl mx-auto mb-6">
+        Layanan API untuk pengiriman pesan teks, gambar, dan dokumen WhatsApp dengan dukungan multi-sesi.
+      </p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="#session-management" class="btn btn-sm sm:btn-md bg-white text-emerald-800 hover:bg-gray-100 border-none font-semibold">
+          Manajemen Sesi
+        </a>
+        <a href="#api-reference" class="btn btn-sm sm:btn-md btn-outline text-white border-white hover:bg-white/10 font-semibold">
+          Dokumentasi API
+        </a>
       </div>
     </div>
   </div>
@@ -60,91 +60,121 @@
   <div class="container mx-auto px-4 py-12 max-w-6xl">
 
     <!-- Quick Features -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-      <div class="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
-        <div class="card-body text-center">
-          <div class="text-4xl mb-4">🔄</div>
-          <h3 class="card-title justify-center">Multi Session</h3>
-          <p class="text-sm opacity-70">Connect multiple WhatsApp accounts simultaneously</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      <div class="card bg-base-100 shadow-sm border border-base-300">
+        <div class="card-body p-5">
+          <div class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center mb-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+            </svg>
+          </div>
+          <h3 class="card-title text-base font-semibold">Multi Session</h3>
+          <p class="text-sm text-base-content/70">Mendukung koneksi beberapa nomor WhatsApp secara bersamaan.</p>
         </div>
       </div>
-      <div class="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
-        <div class="card-body text-center">
-          <div class="text-4xl mb-4">⚡</div>
-          <h3 class="card-title justify-center">Fast & Reliable</h3>
-          <p class="text-sm opacity-70">High-performance message delivery</p>
+      <div class="card bg-base-100 shadow-sm border border-base-300">
+        <div class="card-body p-5">
+          <div class="w-10 h-10 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center mb-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3 class="card-title text-base font-semibold">Performa Stabil</h3>
+          <p class="text-sm text-base-content/70">Pengiriman pesan cepat dengan queue non-blocking dan delay rate.</p>
         </div>
       </div>
-      <div class="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
-        <div class="card-body text-center">
-          <div class="text-4xl mb-4">🎨</div>
-          <h3 class="card-title justify-center">Modern UI</h3>
-          <p class="text-sm opacity-70">Clean and responsive design</p>
+      <div class="card bg-base-100 shadow-sm border border-base-300">
+        <div class="card-body p-5">
+          <div class="w-10 h-10 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center mb-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+          </div>
+          <h3 class="card-title text-base font-semibold">Integrasi Fleksibel</h3>
+          <p class="text-sm text-base-content/70">API RESTful sederhana yang kompatibel dengan cURL, Node, PHP, Python, dll.</p>
         </div>
       </div>
     </div>
 
     <!-- Session Management -->
     <div id="session-management" class="mb-12">
-      <h2 class="text-3xl font-bold text-center mb-8">📱 Session Management</h2>
-      <div class="card bg-base-100 shadow-xl">
-        <div class="card-body">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h2 class="text-2xl font-bold tracking-tight text-base-content">Manajemen Sesi</h2>
+          <p class="text-sm text-base-content/70">Kelola dan pantau status koneksi nomor WhatsApp aktif</p>
+        </div>
+      </div>
+
+      <div class="card bg-base-100 shadow-md border border-base-300">
+        <div class="card-body p-6">
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
             <!-- Create Session -->
             <div>
-              <h3 class="text-xl font-bold mb-4 flex items-center">
-                <span
-                  class="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-sm font-bold mr-3">1</span>
-                Create New Session
-              </h3>
+              <div class="flex items-center gap-2 mb-4">
+                <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold">1</span>
+                <h3 class="text-base font-bold text-base-content">Mulai Sesi Baru</h3>
+              </div>
               <div class="form-control space-y-4">
                 <div>
-                  <label class="label">
-                    <span class="label-text">Session Name</span>
+                  <label class="label pb-1" for="sessionName">
+                    <span class="label-text text-sm font-medium">Nama Sesi (Session ID)</span>
                   </label>
-                  <input type="text" id="sessionName" placeholder="e.g., main, customer-service"
-                    class="input input-bordered w-full" value="main">
+                  <input type="text" id="sessionName" placeholder="Contoh: main, cs-support"
+                    class="input input-bordered w-full text-sm" value="main">
+                  <span class="text-xs text-base-content/60 mt-1 block">Gunakan alfanumerik tanpa spasi.</span>
                 </div>
-                <button onclick="createSession()" class="btn btn-primary w-full">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                <button onclick="createSession()" class="btn btn-primary w-full text-sm font-semibold">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                   </svg>
-                  Create Session & Get QR Code
+                  Generate QR & Tautkan Perangkat
                 </button>
               </div>
             </div>
 
             <!-- Session Status -->
             <div>
-              <h3 class="text-xl font-bold mb-4 flex items-center">
-                <span
-                  class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold mr-3">2</span>
-                Session Status
-              </h3>
+              <div class="flex items-center gap-2 mb-4">
+                <span class="w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold">2</span>
+                <h3 class="text-base font-bold text-base-content">Pemeriksaan Status</h3>
+              </div>
               <div class="space-y-3">
-                <button onclick="checkSessions()" class="btn btn-outline w-full">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  <button onclick="checkSessions()" class="btn btn-outline btn-sm text-xs">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24"
+                      stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                    Daftar Sesi
+                  </button>
+                  <button onclick="checkDetailedStatus()" class="btn btn-primary btn-sm text-xs">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24"
+                      stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Cek Status
+                  </button>
+                  <button onclick="disconnectSession()" class="btn btn-error btn-outline btn-sm text-xs">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24"
+                      stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                    </svg>
+                    Putus Sesi
+                  </button>
+                </div>
+                <button onclick="testEndpoint()" class="btn btn-ghost btn-xs w-full text-xs text-base-content/60">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
-                  Check Active Sessions
+                  Buka Endpoint /sessions di Tab Baru
                 </button>
-                <button onclick="checkDetailedStatus()" class="btn btn-primary w-full">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  Check Session Status
-                </button>
-                <button onclick="testEndpoint()" class="btn btn-sm btn-ghost w-full text-xs">
-                  🔗 Test Endpoint Directly
-                </button>
-                <div id="sessionStatus" class="text-sm bg-base-200 p-4 rounded-lg">
-                  <div class="text-center text-gray-500">Click "Check Active Sessions" to view status</div>
+                <div id="sessionStatus" class="text-sm bg-base-200 border border-base-300 p-4 rounded-lg">
+                  <div class="text-center text-base-content/60 text-xs py-2">Klik tombol di atas untuk memeriksa status sesi</div>
                 </div>
               </div>
             </div>
@@ -153,121 +183,613 @@
       </div>
     </div>
 
-    <!-- API Reference -->
+    <!-- API Reference & Interactive Testing -->
     <div id="api-reference" class="mb-12">
-      <h2 class="text-3xl font-bold text-center mb-8">📖 API Reference</h2>
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+        <div>
+          <h2 class="text-2xl font-bold tracking-tight text-base-content">Dokumentasi & Uji Coba API</h2>
+          <p class="text-xs sm:text-sm text-base-content/70">Uji seluruh endpoint langsung dari antarmuka ini tanpa perlu Postman</p>
+        </div>
+        <!-- Quick Filter -->
+        <div class="join">
+          <button onclick="filterApiCards('all')" class="btn btn-xs join-item api-filter-btn btn-active" data-filter="all">Semua</button>
+          <button onclick="filterApiCards('message')" class="btn btn-xs join-item api-filter-btn" data-filter="message">Pesan Tunggal</button>
+          <button onclick="filterApiCards('bulk')" class="btn btn-xs join-item api-filter-btn" data-filter="bulk">Pesan Massal</button>
+          <button onclick="filterApiCards('session')" class="btn btn-xs join-item api-filter-btn" data-filter="session">Sesi</button>
+        </div>
+      </div>
+
       <div class="space-y-6">
 
-        <!-- Send Message -->
-        <div class="card bg-base-100 shadow-lg">
-          <div class="card-body">
-            <h3 class="card-title text-green-600">Send Text Message</h3>
-            <div class="mockup-code">
-              <pre data-prefix="$"><code>curl -X POST http://localhost:5001/send-message \</code></pre>
-              <pre data-prefix=""><code>  -H "Content-Type: application/json" \</code></pre>
-              <pre data-prefix=""><code>  -d '{"session":"main","to":"6281234567890","text":"Hello!"}'</code></pre>
+        <!-- 1. Send Message (Text) -->
+        <div class="card bg-base-100 shadow-sm border border-base-300 api-card" data-category="message">
+          <div class="card-body p-5 sm:p-6">
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-base-300">
+              <div class="flex items-center gap-2">
+                <span class="badge badge-success font-mono font-bold text-xs text-white">POST</span>
+                <code class="text-sm font-mono font-bold text-base-content">/send-message</code>
+              </div>
+              <span class="text-xs text-base-content/60">Kirim Pesan Teks WhatsApp</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-4">
+              <!-- Form Parameters -->
+              <div class="space-y-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label class="label pb-1"><span class="label-text text-xs font-semibold">Session ID</span></label>
+                    <input type="text" id="api-send-msg-session" value="main" class="input input-bordered input-sm w-full font-mono text-xs">
+                  </div>
+                  <div>
+                    <label class="label pb-1"><span class="label-text text-xs font-semibold">Nomor Tujuan (to)</span></label>
+                    <input type="text" id="api-send-msg-to" placeholder="6281234567890" class="input input-bordered input-sm w-full font-mono text-xs">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="label pb-1"><span class="label-text text-xs font-semibold">Isi Pesan (text)</span></label>
+                  <textarea id="api-send-msg-text" rows="3" class="textarea textarea-bordered textarea-sm w-full text-xs" placeholder="Halo! Ini pesan tes dari WhatsApp Gateway.">Halo! Ini pesan tes dari WhatsApp API Gateway.</textarea>
+                </div>
+
+                <div class="flex items-center justify-between pt-1">
+                  <label class="cursor-pointer label p-0 gap-2">
+                    <input type="checkbox" id="api-send-msg-group" class="checkbox checkbox-sm checkbox-primary">
+                    <span class="label-text text-xs">Kirim ke Grup WhatsApp (isGroup)</span>
+                  </label>
+                  <button id="btn-test-send-msg" onclick="testSendMessage()" class="btn btn-primary btn-sm text-xs font-semibold px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                    </svg>
+                    Kirim Request
+                  </button>
+                </div>
+              </div>
+
+              <!-- Response Box & cURL Reference -->
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-base-content">Hasil Response:</span>
+                  <div class="tabs tabs-boxed py-0 px-1 bg-base-200">
+                    <button class="tab tab-xs tab-active" onclick="switchTab(this, 'resp-box-send-msg', 'curl-box-send-msg')">Response</button>
+                    <button class="tab tab-xs" onclick="switchTab(this, 'curl-box-send-msg', 'resp-box-send-msg')">cURL</button>
+                  </div>
+                </div>
+                <div id="resp-box-send-msg">
+                  <div class="rounded-lg border border-dashed border-base-300 bg-base-200/50 p-6 text-center text-xs text-base-content/60">
+                    Isi parameter di samping dan klik "Kirim Request" untuk melihat respons API.
+                  </div>
+                </div>
+                <div id="curl-box-send-msg" class="hidden">
+                  <div class="mockup-code text-xs">
+                    <pre data-prefix="$"><code>curl -X POST http://localhost:5001/send-message \</code></pre>
+                    <pre data-prefix=""><code>  -H "Content-Type: application/json" \</code></pre>
+                    <pre data-prefix=""><code>  -d '{"session":"main","to":"6281234567890","text":"Halo!"}'</code></pre>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Send Image -->
-        <div class="card bg-base-100 shadow-lg">
-          <div class="card-body">
-            <h3 class="card-title text-blue-600">Send Image</h3>
-            <div class="mockup-code">
-              <pre data-prefix="$"><code>curl -X POST http://localhost:5001/send-image \</code></pre>
-              <pre data-prefix=""><code>  -H "Content-Type: application/json" \</code></pre>
-              <pre
-                data-prefix=""><code>  -d '{"session":"main","to":"6281234567890","caption":"Nice!","url":"https://example.com/image.jpg"}'</code></pre>
+        <!-- 2. Send Image -->
+        <div class="card bg-base-100 shadow-sm border border-base-300 api-card" data-category="message">
+          <div class="card-body p-5 sm:p-6">
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-base-300">
+              <div class="flex items-center gap-2">
+                <span class="badge badge-success font-mono font-bold text-xs text-white">POST</span>
+                <code class="text-sm font-mono font-bold text-base-content">/send-image</code>
+              </div>
+              <span class="text-xs text-base-content/60">Kirim Pesan Gambar (Image)</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-4">
+              <!-- Form Parameters -->
+              <div class="space-y-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label class="label pb-1"><span class="label-text text-xs font-semibold">Session ID</span></label>
+                    <input type="text" id="api-send-img-session" value="main" class="input input-bordered input-sm w-full font-mono text-xs">
+                  </div>
+                  <div>
+                    <label class="label pb-1"><span class="label-text text-xs font-semibold">Nomor Tujuan (to)</span></label>
+                    <input type="text" id="api-send-img-to" placeholder="6281234567890" class="input input-bordered input-sm w-full font-mono text-xs">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="label pb-1"><span class="label-text text-xs font-semibold">URL Gambar (url)</span></label>
+                  <input type="url" id="api-send-img-url" value="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe" class="input input-bordered input-sm w-full font-mono text-xs" placeholder="https://domain.com/image.jpg">
+                </div>
+
+                <div>
+                  <label class="label pb-1"><span class="label-text text-xs font-semibold">Caption Gambar (caption)</span></label>
+                  <input type="text" id="api-send-img-caption" value="Contoh Gambar WhatsApp Gateway" class="input input-bordered input-sm w-full text-xs" placeholder="Keterangan gambar...">
+                </div>
+
+                <div class="flex justify-end pt-1">
+                  <button id="btn-test-send-img" onclick="testSendImage()" class="btn btn-primary btn-sm text-xs font-semibold px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                    </svg>
+                    Kirim Gambar
+                  </button>
+                </div>
+              </div>
+
+              <!-- Response Box & cURL Reference -->
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-base-content">Hasil Response:</span>
+                  <div class="tabs tabs-boxed py-0 px-1 bg-base-200">
+                    <button class="tab tab-xs tab-active" onclick="switchTab(this, 'resp-box-send-img', 'curl-box-send-img')">Response</button>
+                    <button class="tab tab-xs" onclick="switchTab(this, 'curl-box-send-img', 'resp-box-send-img')">cURL</button>
+                  </div>
+                </div>
+                <div id="resp-box-send-img">
+                  <div class="rounded-lg border border-dashed border-base-300 bg-base-200/50 p-6 text-center text-xs text-base-content/60">
+                    Isi parameter di samping dan klik "Kirim Gambar" untuk menguji pengiriman media gambar.
+                  </div>
+                </div>
+                <div id="curl-box-send-img" class="hidden">
+                  <div class="mockup-code text-xs">
+                    <pre data-prefix="$"><code>curl -X POST http://localhost:5001/send-image \</code></pre>
+                    <pre data-prefix=""><code>  -H "Content-Type: application/json" \</code></pre>
+                    <pre data-prefix=""><code>  -d '{"session":"main","to":"6281234567890","caption":"Nice!","url":"https://example.com/image.jpg"}'</code></pre>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Send Document -->
-        <div class="card bg-base-100 shadow-lg">
-          <div class="card-body">
-            <h3 class="card-title text-purple-600">Send Document</h3>
-            <div class="mockup-code">
-              <pre data-prefix="$"><code>curl -X POST http://localhost:5001/send-document \</code></pre>
-              <pre data-prefix=""><code>  -H "Content-Type: application/json" \</code></pre>
-              <pre
-                data-prefix=""><code>  -d '{"session":"main","to":"6281234567890","url":"https://example.com/file.pdf","filename":"doc.pdf"}'</code></pre>
+        <!-- 3. Send Document -->
+        <div class="card bg-base-100 shadow-sm border border-base-300 api-card" data-category="message">
+          <div class="card-body p-5 sm:p-6">
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-base-300">
+              <div class="flex items-center gap-2">
+                <span class="badge badge-success font-mono font-bold text-xs text-white">POST</span>
+                <code class="text-sm font-mono font-bold text-base-content">/send-document</code>
+              </div>
+              <span class="text-xs text-base-content/60">Kirim Berkas Dokumen (PDF, DOCX, dll.)</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-4">
+              <!-- Form Parameters -->
+              <div class="space-y-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label class="label pb-1"><span class="label-text text-xs font-semibold">Session ID</span></label>
+                    <input type="text" id="api-send-doc-session" value="main" class="input input-bordered input-sm w-full font-mono text-xs">
+                  </div>
+                  <div>
+                    <label class="label pb-1"><span class="label-text text-xs font-semibold">Nomor Tujuan (to)</span></label>
+                    <input type="text" id="api-send-doc-to" placeholder="6281234567890" class="input input-bordered input-sm w-full font-mono text-xs">
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label class="label pb-1"><span class="label-text text-xs font-semibold">URL Dokumen (url)</span></label>
+                    <input type="url" id="api-send-doc-url" value="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" class="input input-bordered input-sm w-full font-mono text-xs" placeholder="https://domain.com/doc.pdf">
+                  </div>
+                  <div>
+                    <label class="label pb-1"><span class="label-text text-xs font-semibold">Nama File (filename)</span></label>
+                    <input type="text" id="api-send-doc-filename" value="document.pdf" class="input input-bordered input-sm w-full font-mono text-xs">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="label pb-1"><span class="label-text text-xs font-semibold">Caption (opsional)</span></label>
+                  <input type="text" id="api-send-doc-caption" value="Lampiran Dokumen PDF" class="input input-bordered input-sm w-full text-xs">
+                </div>
+
+                <div class="flex justify-end pt-1">
+                  <button id="btn-test-send-doc" onclick="testSendDocument()" class="btn btn-primary btn-sm text-xs font-semibold px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                    </svg>
+                    Kirim Dokumen
+                  </button>
+                </div>
+              </div>
+
+              <!-- Response Box & cURL Reference -->
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-base-content">Hasil Response:</span>
+                  <div class="tabs tabs-boxed py-0 px-1 bg-base-200">
+                    <button class="tab tab-xs tab-active" onclick="switchTab(this, 'resp-box-send-doc', 'curl-box-send-doc')">Response</button>
+                    <button class="tab tab-xs" onclick="switchTab(this, 'curl-box-send-doc', 'resp-box-send-doc')">cURL</button>
+                  </div>
+                </div>
+                <div id="resp-box-send-doc">
+                  <div class="rounded-lg border border-dashed border-base-300 bg-base-200/50 p-6 text-center text-xs text-base-content/60">
+                    Isi parameter di samping dan klik "Kirim Dokumen" untuk menguji pengiriman dokumen.
+                  </div>
+                </div>
+                <div id="curl-box-send-doc" class="hidden">
+                  <div class="mockup-code text-xs">
+                    <pre data-prefix="$"><code>curl -X POST http://localhost:5001/send-document \</code></pre>
+                    <pre data-prefix=""><code>  -H "Content-Type: application/json" \</code></pre>
+                    <pre data-prefix=""><code>  -d '{"session":"main","to":"6281234567890","url":"https://example.com/file.pdf","filename":"doc.pdf"}'</code></pre>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <!--  Send Bulk Message -->
-        <div class="card bg-base-100 shadow-lg">
-          <div class="card-body">
-            <h3 class="card-title text-orange-600">Send Bulk Message</h3>
-            <div class="mockup-code">
-              <pre data-prefix="$"><code>curl -X POST http://localhost:5001/send-bulk-message \</code></pre>
-              <pre data-prefix=""><code>  -H "Content-Type: application/json" \</code></pre>
-              <pre data-prefix=""><code>  -d '{
-        "session": "main",
-        "delay": 1000,
-        "data": [
-          { "to": "6281234567890", "text": "Hello!", "isGroup": false },
-          { "to": "6289876543210", "text": "Hi there!", "isGroup": false }
-        ]
-      }'</code></pre>
+        <!-- 4. Send Bulk Message -->
+        <div class="card bg-base-100 shadow-sm border border-base-300 api-card" data-category="bulk">
+          <div class="card-body p-5 sm:p-6">
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-base-300">
+              <div class="flex items-center gap-2">
+                <span class="badge badge-success font-mono font-bold text-xs text-white">POST</span>
+                <code class="text-sm font-mono font-bold text-base-content">/send-bulk-message</code>
+              </div>
+              <span class="text-xs text-base-content/60">Kirim Pesan Teks Massal (Bulk)</span>
             </div>
-            <div class="text-xs mt-2 text-gray-500">
-              <span class="font-bold">Note:</span> <code>data</code> is an array of objects. <code>delay</code> is in
-              milliseconds (default 1000ms).
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-4">
+              <!-- Form Parameters -->
+              <div class="space-y-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label class="label pb-1"><span class="label-text text-xs font-semibold">Session ID</span></label>
+                    <input type="text" id="api-bulk-msg-session" value="main" class="input input-bordered input-sm w-full font-mono text-xs">
+                  </div>
+                  <div>
+                    <label class="label pb-1"><span class="label-text text-xs font-semibold">Jeda Antar Pesan / Delay (ms)</span></label>
+                    <input type="number" id="api-bulk-msg-delay" value="1000" min="500" class="input input-bordered input-sm w-full font-mono text-xs">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="label pb-1"><span class="label-text text-xs font-semibold">Data Penerima (JSON Array)</span></label>
+                  <textarea id="api-bulk-msg-data" rows="5" class="textarea textarea-bordered textarea-sm w-full font-mono text-xs leading-relaxed">[
+  { "to": "6281234567890", "text": "Pesan 1 untuk penerima pertama", "isGroup": false },
+  { "to": "6289876543210", "text": "Pesan 2 untuk penerima kedua", "isGroup": false }
+]</textarea>
+                </div>
+
+                <div class="flex justify-end pt-1">
+                  <button id="btn-test-bulk-msg" onclick="testSendBulkMessage()" class="btn btn-primary btn-sm text-xs font-semibold px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    Kirim Bulk Message
+                  </button>
+                </div>
+              </div>
+
+              <!-- Response Box & cURL Reference -->
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-base-content">Hasil Response:</span>
+                  <div class="tabs tabs-boxed py-0 px-1 bg-base-200">
+                    <button class="tab tab-xs tab-active" onclick="switchTab(this, 'resp-box-bulk-msg', 'curl-box-bulk-msg')">Response</button>
+                    <button class="tab tab-xs" onclick="switchTab(this, 'curl-box-bulk-msg', 'resp-box-bulk-msg')">cURL</button>
+                  </div>
+                </div>
+                <div id="resp-box-bulk-msg">
+                  <div class="rounded-lg border border-dashed border-base-300 bg-base-200/50 p-6 text-center text-xs text-base-content/60">
+                    Uji pengiriman pesan massal non-blocking dengan delay otomatis antar pesan.
+                  </div>
+                </div>
+                <div id="curl-box-bulk-msg" class="hidden">
+                  <div class="mockup-code text-xs">
+                    <pre data-prefix="$"><code>curl -X POST http://localhost:5001/send-bulk-message \</code></pre>
+                    <pre data-prefix=""><code>  -H "Content-Type: application/json" \</code></pre>
+                    <pre data-prefix=""><code>  -d '{"session":"main","delay":1000,"data":[{"to":"62812...","text":"Hi"}]}'</code></pre>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Send Bulk Image -->
-        <div class="card bg-base-100 shadow-lg">
-          <div class="card-body">
-            <h3 class="card-title text-teal-600">Send Bulk Image</h3>
-            <div class="mockup-code">
-              <pre data-prefix="$"><code>curl -X POST http://localhost:5001/send-bulk-image \</code></pre>
-              <pre data-prefix=""><code>  -H "Content-Type: application/json" \</code></pre>
-              <pre data-prefix=""><code>  -d '{
-        "session": "main",
-        "delay": 1000,
-        "data": [
-          { "to": "6281234567890", "caption": "Nice!", "url": "https://example.com/image1.jpg" },
-          { "to": "6289876543210", "caption": "Great pic!", "url": "https://example.com/image2.jpg" }
-        ]
-            }'</code></pre>
+        <!-- 5. Send Bulk Image -->
+        <div class="card bg-base-100 shadow-sm border border-base-300 api-card" data-category="bulk">
+          <div class="card-body p-5 sm:p-6">
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-base-300">
+              <div class="flex items-center gap-2">
+                <span class="badge badge-success font-mono font-bold text-xs text-white">POST</span>
+                <code class="text-sm font-mono font-bold text-base-content">/send-bulk-image</code>
+              </div>
+              <span class="text-xs text-base-content/60">Kirim Pesan Gambar Massal (Bulk Image)</span>
             </div>
-            <div class="text-xs mt-2 text-gray-500">
-              <span class="font-bold">Note:</span> <code>session</code> bisa dikirim lewat body, query, atau header.<br>
-              <code>data</code> adalah array berisi objek <code>to</code>, <code>caption</code>, dan
-              <code>url</code>.<br>
-              <code>delay</code> dalam milidetik (default 1000ms).
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-4">
+              <!-- Form Parameters -->
+              <div class="space-y-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label class="label pb-1"><span class="label-text text-xs font-semibold">Session ID</span></label>
+                    <input type="text" id="api-bulk-img-session" value="main" class="input input-bordered input-sm w-full font-mono text-xs">
+                  </div>
+                  <div>
+                    <label class="label pb-1"><span class="label-text text-xs font-semibold">Delay (ms)</span></label>
+                    <input type="number" id="api-bulk-img-delay" value="1000" min="500" class="input input-bordered input-sm w-full font-mono text-xs">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="label pb-1"><span class="label-text text-xs font-semibold">Data Gambar (JSON Array)</span></label>
+                  <textarea id="api-bulk-img-data" rows="5" class="textarea textarea-bordered textarea-sm w-full font-mono text-xs leading-relaxed">[
+  { "to": "6281234567890", "caption": "Gambar 1", "url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe" },
+  { "to": "6289876543210", "caption": "Gambar 2", "url": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809" }
+]</textarea>
+                </div>
+
+                <div class="flex justify-end pt-1">
+                  <button id="btn-test-bulk-img" onclick="testSendBulkImage()" class="btn btn-primary btn-sm text-xs font-semibold px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    Kirim Bulk Image
+                  </button>
+                </div>
+              </div>
+
+              <!-- Response Box & cURL Reference -->
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-base-content">Hasil Response:</span>
+                  <div class="tabs tabs-boxed py-0 px-1 bg-base-200">
+                    <button class="tab tab-xs tab-active" onclick="switchTab(this, 'resp-box-bulk-img', 'curl-box-bulk-img')">Response</button>
+                    <button class="tab tab-xs" onclick="switchTab(this, 'curl-box-bulk-img', 'resp-box-bulk-img')">cURL</button>
+                  </div>
+                </div>
+                <div id="resp-box-bulk-img">
+                  <div class="rounded-lg border border-dashed border-base-300 bg-base-200/50 p-6 text-center text-xs text-base-content/60">
+                    Uji pengiriman gambar massal ke banyak nomor sekaligus.
+                  </div>
+                </div>
+                <div id="curl-box-bulk-img" class="hidden">
+                  <div class="mockup-code text-xs">
+                    <pre data-prefix="$"><code>curl -X POST http://localhost:5001/send-bulk-image \</code></pre>
+                    <pre data-prefix=""><code>  -H "Content-Type: application/json" \</code></pre>
+                    <pre data-prefix=""><code>  -d '{"session":"main","delay":1000,"data":[{"to":"62812...","caption":"Foto","url":"https://..."}]}'</code></pre>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Send Bulk Document -->
-        <div class="card bg-base-100 shadow-lg">
-          <div class="card-body">
-            <h3 class="card-title text-indigo-600">Send Bulk Document</h3>
-            <div class="mockup-code">
-              <pre data-prefix="$"><code>curl -X POST http://localhost:5001/send-bulk-document \</code></pre>
-              <pre data-prefix=""><code>  -H "Content-Type: application/json" \</code></pre>
-              <pre data-prefix=""><code>  -d '{
-        "session": "main",
-        "delay": 1000,
-        "data": [
-          { "to": "6281234567890", "url": "https://example.com/doc1.pdf", "filename": "doc1.pdf", "isGroup": false },
-          { "to": "6289876543210", "url": "https://example.com/doc2.pdf", "filename": "doc2.pdf", "isGroup": false }
-        ]
-      }'</code></pre>
+        <!-- 6. Send Bulk Document -->
+        <div class="card bg-base-100 shadow-sm border border-base-300 api-card" data-category="bulk">
+          <div class="card-body p-5 sm:p-6">
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-base-300">
+              <div class="flex items-center gap-2">
+                <span class="badge badge-success font-mono font-bold text-xs text-white">POST</span>
+                <code class="text-sm font-mono font-bold text-base-content">/send-bulk-document</code>
+              </div>
+              <span class="text-xs text-base-content/60">Kirim Dokumen Massal (Bulk Document)</span>
             </div>
-            <div class="text-xs mt-2 text-gray-500">
-              <span class="font-bold">Note:</span> <code>data</code> is an array of objects. <code>delay</code> is in
-              milliseconds (default 1000ms).
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-4">
+              <!-- Form Parameters -->
+              <div class="space-y-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label class="label pb-1"><span class="label-text text-xs font-semibold">Session ID</span></label>
+                    <input type="text" id="api-bulk-doc-session" value="main" class="input input-bordered input-sm w-full font-mono text-xs">
+                  </div>
+                  <div>
+                    <label class="label pb-1"><span class="label-text text-xs font-semibold">Delay (ms)</span></label>
+                    <input type="number" id="api-bulk-doc-delay" value="1000" min="500" class="input input-bordered input-sm w-full font-mono text-xs">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="label pb-1"><span class="label-text text-xs font-semibold">Data Dokumen (JSON Array)</span></label>
+                  <textarea id="api-bulk-doc-data" rows="5" class="textarea textarea-bordered textarea-sm w-full font-mono text-xs leading-relaxed">[
+  { "to": "6281234567890", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "filename": "doc1.pdf", "caption": "File 1" },
+  { "to": "6289876543210", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "filename": "doc2.pdf", "caption": "File 2" }
+]</textarea>
+                </div>
+
+                <div class="flex justify-end pt-1">
+                  <button id="btn-test-bulk-doc" onclick="testSendBulkDocument()" class="btn btn-primary btn-sm text-xs font-semibold px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    Kirim Bulk Document
+                  </button>
+                </div>
+              </div>
+
+              <!-- Response Box & cURL Reference -->
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-base-content">Hasil Response:</span>
+                  <div class="tabs tabs-boxed py-0 px-1 bg-base-200">
+                    <button class="tab tab-xs tab-active" onclick="switchTab(this, 'resp-box-bulk-doc', 'curl-box-bulk-doc')">Response</button>
+                    <button class="tab tab-xs" onclick="switchTab(this, 'curl-box-bulk-doc', 'resp-box-bulk-doc')">cURL</button>
+                  </div>
+                </div>
+                <div id="resp-box-bulk-doc">
+                  <div class="rounded-lg border border-dashed border-base-300 bg-base-200/50 p-6 text-center text-xs text-base-content/60">
+                    Uji pengiriman dokumen secara massal dengan konfigurasi delay.
+                  </div>
+                </div>
+                <div id="curl-box-bulk-doc" class="hidden">
+                  <div class="mockup-code text-xs">
+                    <pre data-prefix="$"><code>curl -X POST http://localhost:5001/send-bulk-document \</code></pre>
+                    <pre data-prefix=""><code>  -H "Content-Type: application/json" \</code></pre>
+                    <pre data-prefix=""><code>  -d '{"session":"main","delay":1000,"data":[{"to":"62812...","filename":"doc.pdf","url":"https://..."}]}'</code></pre>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
+        <!-- 7. Session Status API -->
+        <div class="card bg-base-100 shadow-sm border border-base-300 api-card" data-category="session">
+          <div class="card-body p-5 sm:p-6">
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-base-300">
+              <div class="flex items-center gap-2">
+                <span class="badge badge-info font-mono font-bold text-xs text-white">ALL</span>
+                <code class="text-sm font-mono font-bold text-base-content">/session-status</code>
+              </div>
+              <span class="text-xs text-base-content/60">Cek Status Kesiapan Sesi WhatsApp</span>
+            </div>
 
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-4">
+              <!-- Form Parameters -->
+              <div class="space-y-3">
+                <div>
+                  <label class="label pb-1"><span class="label-text text-xs font-semibold">Session ID (session)</span></label>
+                  <input type="text" id="api-status-session" value="main" class="input input-bordered input-sm w-full font-mono text-xs">
+                </div>
+
+                <div class="flex justify-end pt-1">
+                  <button id="btn-test-status" onclick="testSessionStatusApi()" class="btn btn-primary btn-sm text-xs font-semibold px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Cek Status Sesi
+                  </button>
+                </div>
+              </div>
+
+              <!-- Response Box & cURL Reference -->
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-base-content">Hasil Response:</span>
+                  <div class="tabs tabs-boxed py-0 px-1 bg-base-200">
+                    <button class="tab tab-xs tab-active" onclick="switchTab(this, 'resp-box-status', 'curl-box-status')">Response</button>
+                    <button class="tab tab-xs" onclick="switchTab(this, 'curl-box-status', 'resp-box-status')">cURL</button>
+                  </div>
+                </div>
+                <div id="resp-box-status">
+                  <div class="rounded-lg border border-dashed border-base-300 bg-base-200/50 p-6 text-center text-xs text-base-content/60">
+                    Klik "Cek Status Sesi" untuk mendapatkan JSON status kesiapan sesi.
+                  </div>
+                </div>
+                <div id="curl-box-status" class="hidden">
+                  <div class="mockup-code text-xs">
+                    <pre data-prefix="$"><code>curl -X POST http://localhost:5001/session-status \</code></pre>
+                    <pre data-prefix=""><code>  -H "Content-Type: application/json" \</code></pre>
+                    <pre data-prefix=""><code>  -d '{"session":"main"}'</code></pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Get All Sessions API -->
+        <div class="card bg-base-100 shadow-sm border border-base-300 api-card" data-category="session">
+          <div class="card-body p-5 sm:p-6">
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-base-300">
+              <div class="flex items-center gap-2">
+                <span class="badge badge-info font-mono font-bold text-xs text-white">GET</span>
+                <code class="text-sm font-mono font-bold text-base-content">/sessions</code>
+              </div>
+              <span class="text-xs text-base-content/60">Mendapatkan Daftar Seluruh Sesi Aktif</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-4">
+              <!-- Form Parameters -->
+              <div class="space-y-3">
+                <div>
+                  <label class="label pb-1"><span class="label-text text-xs font-semibold">Security Key (key)</span></label>
+                  <input type="text" id="api-sessions-key" value="<%= apiKey || '' %>" class="input input-bordered input-sm w-full font-mono text-xs">
+                  <span class="text-[11px] text-base-content/50 mt-1 block">Sesuai dengan variabel KEY di file .env.</span>
+                </div>
+
+                <div class="flex justify-end pt-1">
+                  <button id="btn-test-sessions" onclick="testSessionsApi()" class="btn btn-primary btn-sm text-xs font-semibold px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                    Ambil Daftar Sesi
+                  </button>
+                </div>
+              </div>
+
+              <!-- Response Box & cURL Reference -->
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-base-content">Hasil Response:</span>
+                  <div class="tabs tabs-boxed py-0 px-1 bg-base-200">
+                    <button class="tab tab-xs tab-active" onclick="switchTab(this, 'resp-box-sessions', 'curl-box-sessions')">Response</button>
+                    <button class="tab tab-xs" onclick="switchTab(this, 'curl-box-sessions', 'resp-box-sessions')">cURL</button>
+                  </div>
+                </div>
+                <div id="resp-box-sessions">
+                  <div class="rounded-lg border border-dashed border-base-300 bg-base-200/50 p-6 text-center text-xs text-base-content/60">
+                    Klik "Ambil Daftar Sesi" untuk melihat daftar ID sesi yang sedang berjalan.
+                  </div>
+                </div>
+                <div id="curl-box-sessions" class="hidden">
+                  <div class="mockup-code text-xs">
+                    <pre data-prefix="$"><code>curl http://localhost:5001/sessions<% if (apiKey) { %>?key=<%= apiKey %><% } %></code></pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. Delete Session API -->
+        <div class="card bg-base-100 shadow-sm border border-base-300 api-card" data-category="session">
+          <div class="card-body p-5 sm:p-6">
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-base-300">
+              <div class="flex items-center gap-2">
+                <span class="badge badge-error font-mono font-bold text-xs text-white">ALL</span>
+                <code class="text-sm font-mono font-bold text-base-content">/delete-session</code>
+              </div>
+              <span class="text-xs text-base-content/60">Putus Koneksi & Hapus Kredensial Sesi</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-4">
+              <!-- Form Parameters -->
+              <div class="space-y-3">
+                <div>
+                  <label class="label pb-1"><span class="label-text text-xs font-semibold">Session ID (session)</span></label>
+                  <input type="text" id="api-delete-session-name" value="main" class="input input-bordered input-sm w-full font-mono text-xs">
+                  <span class="text-[11px] text-error/80 mt-1 block">Perhatian: Kredensial lokal sesi akan dihapus dan koneksi socket dihentikan.</span>
+                </div>
+
+                <div class="flex justify-end pt-1">
+                  <button id="btn-test-delete-session" onclick="testDeleteSessionApi()" class="btn btn-error btn-outline btn-sm text-xs font-semibold px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                    Hapus / Disconnect Sesi
+                  </button>
+                </div>
+              </div>
+
+              <!-- Response Box & cURL Reference -->
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-base-content">Hasil Response:</span>
+                  <div class="tabs tabs-boxed py-0 px-1 bg-base-200">
+                    <button class="tab tab-xs tab-active" onclick="switchTab(this, 'resp-box-delete', 'curl-box-delete')">Response</button>
+                    <button class="tab tab-xs" onclick="switchTab(this, 'curl-box-delete', 'resp-box-delete')">cURL</button>
+                  </div>
+                </div>
+                <div id="resp-box-delete">
+                  <div class="rounded-lg border border-dashed border-base-300 bg-base-200/50 p-6 text-center text-xs text-base-content/60">
+                    Gunakan untuk menguji pemutusan sesi WhatsApp via API.
+                  </div>
+                </div>
+                <div id="curl-box-delete" class="hidden">
+                  <div class="mockup-code text-xs">
+                    <pre data-prefix="$"><code>curl -X POST http://localhost:5001/delete-session \</code></pre>
+                    <pre data-prefix=""><code>  -H "Content-Type: application/json" \</code></pre>
+                    <pre data-prefix=""><code>  -d '{"session":"main"}'</code></pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
       </div>
     </div>
@@ -288,26 +810,69 @@
   </div>
 
   <!-- Footer -->
-  <footer class="footer footer-center p-10 bg-base-300 text-base-content">
-    <div>
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-600" fill="currentColor" viewBox="0 0 24 24">
-        <path
-          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.569-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.686" />
+  <footer class="footer footer-center p-6 bg-base-300 text-base-content border-t border-base-200">
+    <div class="flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.569-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.686" />
       </svg>
-      <p class="font-bold text-lg">WhatsApp API Gateway</p>
-      <p>Simple and elegant WhatsApp API solution</p>
-    </div>
-    <div>
-      <p>Built with ❤️ for the developer community</p>
+      <span class="font-semibold text-sm">WhatsApp API Gateway</span>
+      <span class="text-xs text-base-content/50">&bull; Panel Kontrol Sistem</span>
     </div>
   </footer>
 
   <script src="/p/js/theme-toggle.js"></script>
   <script>
+    // Tab switcher between Response and cURL
+    function switchTab(clickedTab, showId, hideId) {
+      const parent = clickedTab.parentElement;
+      parent.querySelectorAll('.tab').forEach(t => t.classList.remove('tab-active'));
+      clickedTab.classList.add('tab-active');
+      document.getElementById(showId).classList.remove('hidden');
+      document.getElementById(hideId).classList.add('hidden');
+    }
+
+    // Category filter for API documentation cards
+    function filterApiCards(category) {
+      document.querySelectorAll('.api-filter-btn').forEach(btn => {
+        if (btn.dataset.filter === category) {
+          btn.classList.add('btn-active');
+        } else {
+          btn.classList.remove('btn-active');
+        }
+      });
+
+      document.querySelectorAll('.api-card').forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function copyCode(elementId, btn) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      navigator.clipboard.writeText(el.innerText).then(() => {
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<span>Tersalin!</span>';
+        setTimeout(() => { btn.innerHTML = originalText; }, 1500);
+      });
+    }
+
     function createSession() {
       const sessionName = document.getElementById('sessionName').value.trim();
       if (!sessionName) {
-        alert('Please enter a session name');
+        alert('Silakan masukkan nama sesi');
         return;
       }
 
@@ -315,227 +880,494 @@
       window.open(url, '_blank');
     }
 
-    function testEndpoint() {
-      const url = window.location.origin + '/sessions?key=mysupersecretkey';
-      window.open(url, '_blank');
-    }
+    // Disconnect session
+    async function disconnectSession(targetSession) {
+      const sessionName = targetSession || document.getElementById('sessionName').value.trim() || 'main';
 
-    async function checkSessions() {
+      if (!confirm(`Yakin ingin memutuskan sesi '${sessionName}'?\n\nKoneksi WhatsApp akan dihentikan dan kredensial lokal akan dihapus. Anda harus scan QR ulang jika ingin menautkan kembali.`)) {
+        return;
+      }
+
       const statusDiv = document.getElementById('sessionStatus');
-
-      // Show loading state
       statusDiv.innerHTML = `
         <div class="flex items-center justify-center p-4">
-          <div class="loading loading-spinner loading-sm mr-2"></div>
-          <span class="text-gray-600">Checking sessions...</span>
+          <div class="loading loading-spinner loading-sm mr-2 text-error"></div>
+          <span class="text-xs text-base-content/70">Memutuskan koneksi sesi ${sessionName}...</span>
         </div>
       `;
 
       try {
-        const response = await fetch('/sessions?key=mysupersecretkey', {
-          method: 'GET',
+        const response = await fetch('/delete-session', {
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-          }
+          },
+          body: JSON.stringify({ session: sessionName })
         });
 
-        // Accept 200 or 303 as success
-        if (!(response.ok || response.status === 303)) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
         const data = await response.json();
-        console.log('Sessions response:', data); // Debug log
-
-        // If data exists, treat as success
-        if (data.data && Array.isArray(data.data)) {
-          const sessions = data.data;
-          if (sessions.length > 0) {
-            statusDiv.innerHTML = `
-              <div class="font-bold text-green-600 mb-3 text-lg flex items-center justify-center gap-2">
-          <span class="inline-block bg-green-100 text-green-600 rounded-full px-3 py-1 text-sm">✅</span>
-          Active Sessions <span class="badge badge-outline badge-success ml-2">${sessions.length}</span>
-              </div>
-              <div class="divide-y divide-base-200 rounded-lg overflow-hidden bg-base-50 shadow-sm">
-          ${sessions.map(session => `
-            <div class="flex justify-between items-center px-4 py-3 bg-base-100 hover:bg-base-200 transition">
-              <span class="font-mono text-blue-700 text-base">${session}</span>
-              <span class="badge badge-success badge-sm flex items-center gap-1">
-                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                Connected
-              </span>
-            </div>
-          `).join('')}
-              </div>
-            `;
-          } else {
-            statusDiv.innerHTML = `
-              <div class="text-center py-6">
-          <div class="text-yellow-600 font-semibold text-lg mb-2 flex items-center justify-center gap-2">
-            <span class="inline-block bg-yellow-100 text-yellow-600 rounded-full px-2 py-1 text-sm">⚠️</span>
-            No active sessions found
-          </div>
-          <div class="text-sm text-gray-500">Create a new session to get started</div>
-              </div>
-            `;
-          }
-        } else {
-          statusDiv.innerHTML = `
-        <div class="text-center py-4">
-          <div class="text-red-600 font-medium">❌ Failed to fetch sessions</div>
-          <div class="text-sm text-gray-500 mt-1">Server responded with error</div>
-        </div>
-          `;
-        }
-      } catch (error) {
-        console.error('Error fetching sessions:', error); // Debug log
+        
         statusDiv.innerHTML = `
-          <div class="text-center py-4">
-        <div class="text-red-600 font-medium">🔴 Connection Error</div>
-        <div class="text-sm text-gray-500 mt-1">${error.message}</div>
-        <div class="text-xs text-gray-400 mt-2">Check if the server is running on port 5001</div>
+          <div class="alert alert-info text-xs py-3 px-4 rounded-lg flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0 text-info" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>${data.message || `Sesi '${sessionName}' berhasil diputuskan.`}</span>
+            </div>
+            <button onclick="checkSessions()" class="btn btn-ghost btn-xs">Cek Sesi</button>
+          </div>
+        `;
+      } catch (error) {
+        statusDiv.innerHTML = `
+          <div class="text-center py-3">
+            <div class="text-error font-medium text-xs">Gagal Memutuskan Sesi</div>
+            <div class="text-base-content/50 text-xs mt-0.5">${error.message}</div>
           </div>
         `;
       }
     }
 
-    // Check detailed session status
-    async function checkDetailedStatus() {
+    // Check active sessions
+    async function checkSessions() {
       const statusDiv = document.getElementById('sessionStatus');
-      const sessionName = document.getElementById('sessionName').value || 'main';
 
-      // Show loading state
       statusDiv.innerHTML = `
         <div class="flex items-center justify-center p-4">
-          <div class="loading loading-spinner loading-sm mr-2"></div>
-          <span class="text-gray-600">Checking session status...</span>
+          <div class="loading loading-spinner loading-sm mr-2 text-primary"></div>
+          <span class="text-xs text-base-content/70">Memeriksa daftar sesi...</span>
+        </div>
+      `;
+
+      try {
+        const configuredKey = '<%= apiKey || "" %>';
+        const sessionsUrl = configuredKey ? `/sessions?key=${encodeURIComponent(configuredKey)}` : '/sessions';
+        const response = await fetch(sessionsUrl, {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' }
+        });
+
+        if (!(response.ok || response.status === 303)) {
+          throw new Error(`HTTP error status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (data.data && Array.isArray(data.data)) {
+          const sessions = data.data;
+          if (sessions.length > 0) {
+            statusDiv.innerHTML = `
+              <div class="mb-3 flex items-center justify-between">
+                <span class="font-semibold text-xs text-base-content">Sesi Terdaftar</span>
+                <span class="badge badge-success badge-sm">${sessions.length} Aktif</span>
+              </div>
+              <div class="divide-y divide-base-300 rounded-lg overflow-hidden border border-base-300 bg-base-100 shadow-sm">
+                ${sessions.map(session => `
+                  <div class="flex justify-between items-center px-3 py-2 hover:bg-base-200/50 transition">
+                    <div class="flex items-center gap-2">
+                      <span class="font-mono text-xs font-semibold text-base-content">${session}</span>
+                      <span class="badge badge-success badge-xs font-mono">connected</span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                      <button onclick="setAndCheckDetail('${session}')" class="btn btn-ghost btn-xs text-[11px] h-6 min-h-0 px-2">Detail</button>
+                      <button onclick="disconnectSession('${session}')" class="btn btn-error btn-outline btn-xs text-[11px] h-6 min-h-0 px-2">Disconnect</button>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            `;
+          } else {
+            statusDiv.innerHTML = `
+              <div class="text-center py-4">
+                <div class="text-warning font-semibold text-xs mb-1">Tidak ada sesi aktif</div>
+                <div class="text-[11px] text-base-content/60">Gunakan form "Mulai Sesi Baru" untuk menautkan nomor WhatsApp Anda.</div>
+              </div>
+            `;
+          }
+        } else {
+          statusDiv.innerHTML = `
+            <div class="text-center py-4">
+              <div class="text-error font-medium text-xs">Gagal memuat sesi</div>
+              <div class="text-xs text-base-content/60 mt-1">Respon server tidak valid.</div>
+            </div>
+          `;
+        }
+      } catch (error) {
+        statusDiv.innerHTML = `
+          <div class="text-center py-4">
+            <div class="text-error font-medium text-xs">Kesalahan Koneksi</div>
+            <div class="text-xs text-base-content/60 mt-1">${error.message}</div>
+          </div>
+        `;
+      }
+    }
+
+    function setAndCheckDetail(name) {
+      document.getElementById('sessionName').value = name;
+      checkDetailedStatus(name);
+    }
+
+    // Check detailed session status
+    async function checkDetailedStatus(targetSession) {
+      const statusDiv = document.getElementById('sessionStatus');
+      const sessionName = targetSession || document.getElementById('sessionName').value.trim() || 'main';
+
+      statusDiv.innerHTML = `
+        <div class="flex items-center justify-center p-4">
+          <div class="loading loading-spinner loading-sm mr-2 text-primary"></div>
+          <span class="text-xs text-base-content/70">Memeriksa status sesi ${sessionName}...</span>
         </div>
       `;
 
       try {
         const response = await fetch('/session-status', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            session: sessionName
-          })
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ session: sessionName })
         });
 
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error(`HTTP error status: ${response.status}`);
         }
 
         const data = await response.json();
-        console.log('Session status response:', data);
 
-        if (data.status && data.data) {
-          const session = data.data;
+        if (data.status || data.data) {
+          const session = data.data || data;
           let statusBadge = '';
-          let statusIcon = '';
-          let statusColor = '';
 
           switch (session.status) {
             case 'disconnected':
               statusBadge = 'badge-error';
-              statusIcon = '❌';
-              statusColor = 'text-red-600';
               break;
             case 'connecting':
               statusBadge = 'badge-warning';
-              statusIcon = '🔄';
-              statusColor = 'text-yellow-600';
               break;
             case 'connected':
               statusBadge = 'badge-info';
-              statusIcon = '🔗';
-              statusColor = 'text-blue-600';
               break;
             case 'syncing':
               statusBadge = 'badge-warning';
-              statusIcon = '⏳';
-              statusColor = 'text-orange-600';
               break;
             case 'ready':
               statusBadge = 'badge-success';
-              statusIcon = '✅';
-              statusColor = 'text-green-600';
               break;
             default:
               statusBadge = 'badge-neutral';
-              statusIcon = '❓';
-              statusColor = 'text-gray-600';
           }
 
           statusDiv.innerHTML = `
-            <div class="space-y-4">
-              <div class="text-center">
-                <div class="text-2xl mb-2">${statusIcon}</div>
-                <div class="font-bold ${statusColor} text-lg">${session.session_id}</div>
-                <div class="badge ${statusBadge} gap-2 mt-2">
-                  ${session.status.toUpperCase()}
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between pb-2 border-b border-base-300">
+                <div>
+                  <span class="text-[11px] text-base-content/60 block">Session ID</span>
+                  <span class="font-bold text-sm text-base-content font-mono">${session.session_id}</span>
+                </div>
+                <div class="badge ${statusBadge} font-mono font-medium uppercase text-[11px] px-2.5 py-2 text-white">
+                  ${session.status}
                 </div>
               </div>
               
-              <div class="grid grid-cols-1 gap-2 text-sm">
-                <div class="flex justify-between">
-                  <span class="text-gray-500">Status:</span>
-                  <span class="font-medium">${session.message}</span>
+              <div class="grid grid-cols-1 gap-1 text-xs">
+                <div class="flex justify-between py-1 border-b border-base-300/40">
+                  <span class="text-base-content/60">Keterangan:</span>
+                  <span class="font-medium text-base-content text-right">${session.message}</span>
                 </div>
-                <div class="flex justify-between">
-                  <span class="text-gray-500">Ready:</span>
-                  <span class="font-medium ${session.is_ready ? 'text-green-600' : 'text-red-600'}">
-                    ${session.is_ready ? 'Yes' : 'No'}
+                <div class="flex justify-between py-1 border-b border-base-300/40">
+                  <span class="text-base-content/60">Siap Operasi:</span>
+                  <span class="font-medium ${session.is_ready ? 'text-success' : 'text-error'}">
+                    ${session.is_ready ? 'Ya (Ready)' : 'Tidak (Belum Siap)'}
                   </span>
                 </div>
-                <div class="flex justify-between">
-                  <span class="text-gray-500">Session Exists:</span>
-                  <span class="font-medium ${session.session_exists ? 'text-green-600' : 'text-red-600'}">
-                    ${session.session_exists ? 'Yes' : 'No'}
+                <div class="flex justify-between py-1 border-b border-base-300/40">
+                  <span class="text-base-content/60">Sesi Terdaftar:</span>
+                  <span class="font-medium ${session.session_exists ? 'text-success' : 'text-error'}">
+                    ${session.session_exists ? 'Ada' : 'Tidak Ditemukan'}
                   </span>
                 </div>
-                <div class="flex justify-between">
-                  <span class="text-gray-500">Last Check:</span>
-                  <span class="font-medium text-xs">${new Date(session.timestamp).toLocaleTimeString()}</span>
+                <div class="flex justify-between py-1">
+                  <span class="text-base-content/60">Pemeriksaan:</span>
+                  <span class="font-mono text-base-content/70">${new Date(session.timestamp).toLocaleTimeString()}</span>
                 </div>
               </div>
 
-              ${!session.is_ready ? `
-                <div class="alert alert-warning text-sm">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-4 w-4" fill="none" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
-                  </svg>
-                  <span>Session not ready for operations. Please wait.</span>
+              ${session.session_exists ? `
+                <div class="pt-2">
+                  <button onclick="disconnectSession('${session.session_id}')" class="btn btn-error btn-outline btn-xs w-full text-xs gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                    </svg>
+                    Disconnect Sesi '${session.session_id}'
+                  </button>
                 </div>
-              ` : `
-                <div class="alert alert-success text-sm">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-4 w-4" fill="none" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span>Session ready for all operations!</span>
-                </div>
-              `}
+              ` : ''}
             </div>
           `;
         } else {
           statusDiv.innerHTML = `
-            <div class="text-center py-4">
-              <div class="text-red-600 font-medium">❌ Failed to get session status</div>
-              <div class="text-sm text-gray-500 mt-1">Server responded with error</div>
+            <div class="text-center py-3">
+              <div class="text-error font-medium text-xs">Gagal mengambil status sesi</div>
             </div>
           `;
         }
       } catch (error) {
-        console.error('Error fetching session status:', error);
         statusDiv.innerHTML = `
-          <div class="text-center py-4">
-            <div class="text-red-600 font-medium">🔴 Connection Error</div>
-            <div class="text-sm text-gray-500 mt-1">${error.message}</div>
-            <div class="text-xs text-gray-400 mt-2">Check if the server is running</div>
+          <div class="text-center py-3">
+            <div class="text-error font-medium text-xs">Kesalahan Koneksi</div>
+            <div class="text-base-content/50 text-xs mt-0.5">${error.message}</div>
           </div>
         `;
       }
+    }
+
+    // Generic API test execution handler
+    async function handleApiCall({ endpoint, method = 'POST', headers = {}, body = null, responseBoxId, buttonId }) {
+      const btn = document.getElementById(buttonId);
+      const box = document.getElementById(responseBoxId);
+      const originalBtnContent = btn ? btn.innerHTML : '';
+      
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = `<span class="loading loading-spinner loading-xs mr-1"></span> Mengirim...`;
+      }
+      
+      box.innerHTML = `
+        <div class="flex flex-col items-center justify-center py-8 text-base-content/60">
+          <span class="loading loading-spinner loading-md text-primary mb-2"></span>
+          <span class="text-xs">Mengirim request ke ${endpoint}...</span>
+        </div>
+      `;
+      
+      const startTime = performance.now();
+      try {
+        const options = {
+          method,
+          headers: {
+            'Content-Type': 'application/json',
+            ...headers
+          }
+        };
+        if (body && method !== 'GET') {
+          options.body = typeof body === 'string' ? body : JSON.stringify(body);
+        }
+        
+        const res = await fetch(endpoint, options);
+        const duration = Math.round(performance.now() - startTime);
+        const contentType = res.headers.get('content-type') || '';
+        let responseData;
+        if (contentType.includes('application/json')) {
+          responseData = await res.json();
+        } else {
+          responseData = await res.text();
+        }
+        
+        renderResponseBox(box, {
+          status: res.status,
+          statusText: res.statusText || (res.ok ? 'OK' : 'Error'),
+          isSuccess: res.ok,
+          duration,
+          data: responseData
+        });
+      } catch (err) {
+        const duration = Math.round(performance.now() - startTime);
+        renderResponseBox(box, {
+          status: 0,
+          statusText: 'Koneksi Gagal',
+          isSuccess: false,
+          duration,
+          data: { error: err.message || 'Gagal menghubungi server' }
+        });
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = originalBtnContent;
+        }
+      }
+    }
+
+    function renderResponseBox(box, { status, statusText, isSuccess, duration, data }) {
+      const jsonStr = typeof data === 'object' ? JSON.stringify(data, null, 2) : String(data);
+      const badgeClass = isSuccess ? 'badge-success text-white' : 'badge-error text-white';
+      const uniqueId = 'resp_' + Math.random().toString(36).substring(2, 9);
+
+      box.innerHTML = `
+        <div class="rounded-lg border border-base-300 bg-base-100 overflow-hidden shadow-sm">
+          <div class="flex items-center justify-between px-3 py-2 bg-base-200 border-b border-base-300 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="badge ${badgeClass} badge-sm font-mono font-bold">${status} ${statusText}</span>
+              <span class="text-base-content/60 font-mono text-[11px]">${duration} ms</span>
+            </div>
+            <button type="button" onclick="copyCode('${uniqueId}', this)" class="btn btn-ghost btn-xs text-[11px] h-6 min-h-0 px-2 gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+              <span>Salin</span>
+            </button>
+          </div>
+          <div class="p-3 bg-neutral text-neutral-content overflow-x-auto max-h-64">
+            <pre id="${uniqueId}" class="text-xs font-mono whitespace-pre leading-relaxed"><code>${escapeHtml(jsonStr)}</code></pre>
+          </div>
+        </div>
+      `;
+    }
+
+    // Individual endpoint testers
+    function testSendMessage() {
+      const session = document.getElementById('api-send-msg-session').value.trim() || 'main';
+      const to = document.getElementById('api-send-msg-to').value.trim();
+      const text = document.getElementById('api-send-msg-text').value;
+      const isGroup = document.getElementById('api-send-msg-group').checked;
+
+      if (!to) {
+        alert('Silakan masukkan nomor tujuan (to).');
+        return;
+      }
+
+      handleApiCall({
+        endpoint: '/send-message',
+        method: 'POST',
+        body: { session, to, text, isGroup },
+        responseBoxId: 'resp-box-send-msg',
+        buttonId: 'btn-test-send-msg'
+      });
+    }
+
+    function testSendImage() {
+      const session = document.getElementById('api-send-img-session').value.trim() || 'main';
+      const to = document.getElementById('api-send-img-to').value.trim();
+      const url = document.getElementById('api-send-img-url').value.trim();
+      const caption = document.getElementById('api-send-img-caption').value;
+
+      if (!to || !url) {
+        alert('Silakan masukkan nomor tujuan dan URL gambar.');
+        return;
+      }
+
+      handleApiCall({
+        endpoint: '/send-image',
+        method: 'POST',
+        body: { session, to, url, caption },
+        responseBoxId: 'resp-box-send-img',
+        buttonId: 'btn-test-send-img'
+      });
+    }
+
+    function testSendDocument() {
+      const session = document.getElementById('api-send-doc-session').value.trim() || 'main';
+      const to = document.getElementById('api-send-doc-to').value.trim();
+      const url = document.getElementById('api-send-doc-url').value.trim();
+      const filename = document.getElementById('api-send-doc-filename').value.trim() || 'document.pdf';
+      const caption = document.getElementById('api-send-doc-caption').value;
+
+      if (!to || !url) {
+        alert('Silakan masukkan nomor tujuan dan URL dokumen.');
+        return;
+      }
+
+      handleApiCall({
+        endpoint: '/send-document',
+        method: 'POST',
+        body: { session, to, url, filename, caption },
+        responseBoxId: 'resp-box-send-doc',
+        buttonId: 'btn-test-send-doc'
+      });
+    }
+
+    function testSendBulkMessage() {
+      const session = document.getElementById('api-bulk-msg-session').value.trim() || 'main';
+      const delay = parseInt(document.getElementById('api-bulk-msg-delay').value) || 1000;
+      let data;
+      try {
+        data = JSON.parse(document.getElementById('api-bulk-msg-data').value);
+      } catch (e) {
+        alert('Format JSON data penerima tidak valid:\n' + e.message);
+        return;
+      }
+
+      handleApiCall({
+        endpoint: '/send-bulk-message',
+        method: 'POST',
+        body: { session, delay, data },
+        responseBoxId: 'resp-box-bulk-msg',
+        buttonId: 'btn-test-bulk-msg'
+      });
+    }
+
+    function testSendBulkImage() {
+      const session = document.getElementById('api-bulk-img-session').value.trim() || 'main';
+      const delay = parseInt(document.getElementById('api-bulk-img-delay').value) || 1000;
+      let data;
+      try {
+        data = JSON.parse(document.getElementById('api-bulk-img-data').value);
+      } catch (e) {
+        alert('Format JSON data gambar tidak valid:\n' + e.message);
+        return;
+      }
+
+      handleApiCall({
+        endpoint: '/send-bulk-image',
+        method: 'POST',
+        body: { session, delay, data },
+        responseBoxId: 'resp-box-bulk-img',
+        buttonId: 'btn-test-bulk-img'
+      });
+    }
+
+    function testSendBulkDocument() {
+      const session = document.getElementById('api-bulk-doc-session').value.trim() || 'main';
+      const delay = parseInt(document.getElementById('api-bulk-doc-delay').value) || 1000;
+      let data;
+      try {
+        data = JSON.parse(document.getElementById('api-bulk-doc-data').value);
+      } catch (e) {
+        alert('Format JSON data dokumen tidak valid:\n' + e.message);
+        return;
+      }
+
+      handleApiCall({
+        endpoint: '/send-bulk-document',
+        method: 'POST',
+        body: { session, delay, data },
+        responseBoxId: 'resp-box-bulk-doc',
+        buttonId: 'btn-test-bulk-doc'
+      });
+    }
+
+    function testSessionStatusApi() {
+      const session = document.getElementById('api-status-session').value.trim() || 'main';
+      handleApiCall({
+        endpoint: '/session-status',
+        method: 'POST',
+        body: { session },
+        responseBoxId: 'resp-box-status',
+        buttonId: 'btn-test-status'
+      });
+    }
+
+    function testSessionsApi() {
+      const key = document.getElementById('api-sessions-key').value.trim();
+      const endpoint = key ? `/sessions?key=${encodeURIComponent(key)}` : '/sessions';
+      handleApiCall({
+        endpoint: endpoint,
+        method: 'GET',
+        responseBoxId: 'resp-box-sessions',
+        buttonId: 'btn-test-sessions'
+      });
+    }
+
+    function testDeleteSessionApi() {
+      const session = document.getElementById('api-delete-session-name').value.trim() || 'main';
+      if (!confirm(`Yakin ingin menghapus / memutuskan sesi '${session}'?\nData kredensial lokal sesi ini akan dihapus.`)) {
+        return;
+      }
+
+      handleApiCall({
+        endpoint: '/delete-session',
+        method: 'POST',
+        body: { session },
+        responseBoxId: 'resp-box-delete',
+        buttonId: 'btn-test-delete-session'
+      });
     }
   </script>
 </body>
