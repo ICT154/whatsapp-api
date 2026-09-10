@@ -72,13 +72,21 @@ const patchedBlock = `                    /* WA_GATEWAY_PATCHED_RECONNECT */
                         }
                         else {
                             retryCount.delete(sessionId);
-                            (0, exports.deleteSession)(sessionId);
+                            if (isLoggedOut) {
+                                (0, exports.deleteSession)(sessionId);
+                            } else {
+                                try {
+                                    const sess = (0, exports.getSession)(sessionId);
+                                    sess === null || sess === void 0 ? void 0 : sess.end(undefined);
+                                } catch (e) {}
+                                sessions.delete(sessionId);
+                            }
                             (_h = callback.get(Defaults_1.CALLBACK_KEY.ON_DISCONNECTED)) === null || _h === void 0 ? void 0 : _h(sessionId);
                             (_j = options.onDisconnected) === null || _j === void 0 ? void 0 : _j.call(options);
                             try {
                                 const logger = require(path_1.default.resolve("utils/logger"));
                                 if (isReplaced) {
-                                    logger.error("Session '" + sessionId + "' stopped: Terdeteksi dibuka di tempat/perangkat lain (connection replaced).");
+                                    logger.warn("Session '" + sessionId + "' disconnected: Terdeteksi dibuka di tempat/perangkat lain (connection replaced). Kredensial disimpan.");
                                 } else if (isLoggedOut) {
                                     logger.error("Session '" + sessionId + "' stopped: Perangkat telah dikeluarkan/logout dari WhatsApp.");
                                 } else {

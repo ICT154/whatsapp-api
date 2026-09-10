@@ -179,7 +179,19 @@ exports.createSessionAPI = async (req, res, next) => {
       typeof global.isSessionReady === "function"
         ? global.isSessionReady(sessionName)
         : false;
-    if (existingSession && isReady) {
+    const currentStatus =
+      typeof global.getSessionStatus === "function"
+        ? global.getSessionStatus(sessionName)
+        : null;
+
+    if (
+      existingSession &&
+      (isReady ||
+        currentStatus === global.SESSION_STATUS?.READY ||
+        currentStatus === global.SESSION_STATUS?.CONNECTED ||
+        currentStatus === global.SESSION_STATUS?.SYNCING ||
+        currentStatus === global.SESSION_STATUS?.CONNECTING)
+    ) {
       return res.status(200).json(
         responseSuccessWithData({
           qr: null,

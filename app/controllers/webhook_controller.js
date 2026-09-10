@@ -81,10 +81,19 @@ function initializeWebhookListeners() {
       const message =
         data.message?.conversation ||
         data.message?.extendedTextMessage?.text ||
+        data.message?.buttonsResponseMessage?.selectedButtonId ||
+        data.message?.templateButtonReplyMessage?.selectedId ||
+        data.message?.listResponseMessage?.singleSelectReply?.selectedRowId ||
         "";
 
       // Skip messages from bot itself or system messages
       if (data.key?.fromMe || sender === sessionId) return;
+
+      // Skip empty or non-text messages (e.g. reactions, stickers, media without text)
+      if (!message || !message.trim()) {
+        logger.debug(`Skipping non-text or empty message from ${sender}`);
+        return;
+      }
 
       const preview = message.replace(/\n/g, " ").substring(0, 60);
       logger.info(
@@ -92,7 +101,9 @@ function initializeWebhookListeners() {
       );
 
       try {
-        const apiUrl = "https://luxeventplanner.com/api/rsvp/whatsapp/response";
+        const apiUrl =
+          process.env.LUX_API_URL ||
+          "https://luxeventplanner.com/api/rsvp/whatsapp/response";
         const payload = {
           number: sender,
           response: (message || "").toString().trim().toLowerCase(),
