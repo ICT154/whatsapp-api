@@ -8,7 +8,7 @@
     "build:css:once": "tailwindcss -i ./src/style.css -o ./public/css/style.css --minify",
     "build:css:dev": "tailwindcss -i ./src/style.css -o ./public/css/style.css",
     "start": "node index.js",
-    "test": "node tests/verify-auth-and-api.js",
+    "test": "node tests/test-media-resilience.js && node tests/verify-auth-and-api.js",
     "test:webhook": "node tests/webhook-test.js",
     "test:webhook-server": "node tests/webhook-test-server.js",
     "postinstall": "node scripts/patch-wa-multi-session.js"

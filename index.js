@@ -57,6 +57,22 @@ global.setSessionStatus = setSessionStatus;
 global.isSessionReady = isSessionReady;
 global.SESSION_STATUS = SESSION_STATUS;
 
+// In-memory message store for satisfying Baileys retry decryption requests (fixes "Waiting for this message")
+const gatewayMessageStore = new Map();
+global.saveGatewayMessage = function (keyId, message) {
+  if (!keyId || !message) return;
+  if (gatewayMessageStore.size > 2000) {
+    const oldestKey = gatewayMessageStore.keys().next().value;
+    gatewayMessageStore.delete(oldestKey);
+  }
+  gatewayMessageStore.set(keyId, message);
+};
+
+global.getGatewayMessage = async function (sessionId, key) {
+  if (!key || !key.id) return undefined;
+  return gatewayMessageStore.get(key.id) || undefined;
+};
+
 // Global error handlers to prevent crashes
 process.on("uncaughtException", (error) => {
   logger.error(`Uncaught Exception: ${error.message}`, error);

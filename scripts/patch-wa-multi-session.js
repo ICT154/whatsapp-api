@@ -1,21 +1,19 @@
 const fs = require("fs");
 const path = require("path");
 
-const targetFile = path.resolve(__dirname, "../node_modules/wa-multi-session/dist/Socket/index.js");
+// 1. Patch wa-multi-session (Socket/index.js)
+const waSocketFile = path.resolve(
+  __dirname,
+  "../node_modules/wa-multi-session/dist/Socket/index.js",
+);
 
-if (!fs.existsSync(targetFile)) {
-  console.log("[patch] wa-multi-session not found, skipping patch");
-  process.exit(0);
-}
+if (fs.existsSync(waSocketFile)) {
+  let content = fs.readFileSync(waSocketFile, "utf8");
+  let modified = false;
 
-let content = fs.readFileSync(targetFile, "utf8");
-
-if (content.includes("/* WA_GATEWAY_PATCHED_RECONNECT */")) {
-  console.log("[patch] wa-multi-session is already patched");
-  process.exit(0);
-}
-
-const targetBlock = `                    if (connection === "close") {
+  // Patch 1A: Reconnect logic (prevent infinite reconnect loops on 440 conflict / 401 logout)
+  if (!content.includes("/* WA_GATEWAY_PATCHED_RECONNECT */")) {
+    const targetReconnect = `                    if (connection === "close") {
                         const code = (_f = (_e = lastDisconnect === null || lastDisconnect === void 0 ? void 0 : lastDisconnect.error) === null || _e === void 0 ? void 0 : _e.output) === null || _f === void 0 ? void 0 : _f.statusCode;
                         let retryAttempt = (_g = retryCount.get(sessionId)) !== null && _g !== void 0 ? _g : 0;
                         let shouldRetry;
@@ -40,7 +38,7 @@ const targetBlock = `                    if (connection === "close") {
                         (_l = options.onConnected) === null || _l === void 0 ? void 0 : _l.call(options);
                     }`;
 
-const patchedBlock = `                    /* WA_GATEWAY_PATCHED_RECONNECT */
+    const patchedReconnect = `                    /* WA_GATEWAY_PATCHED_RECONNECT */
                     if (connection === "close") {
                         const error = lastDisconnect === null || lastDisconnect === void 0 ? void 0 : lastDisconnect.error;
                         const code = (_f = (_e = error) === null || _e === void 0 ? void 0 : _e.output) === null || _f === void 0 ? void 0 : _f.statusCode;
@@ -105,13 +103,226 @@ const patchedBlock = `                    /* WA_GATEWAY_PATCHED_RECONNECT */
                         (_l = options.onConnected) === null || _l === void 0 ? void 0 : _l.call(options);
                     }`;
 
-const normContent = content.replace(/\r\n/g, "\n");
-const normTarget = targetBlock.replace(/\r\n/g, "\n");
+    const normContent = content.replace(/\r\n/g, "\n");
+    const normTarget = targetReconnect.replace(/\r\n/g, "\n");
+    if (normContent.includes(normTarget)) {
+      content = normContent.replace(
+        normTarget,
+        patchedReconnect.replace(/\r\n/g, "\n"),
+      );
+      modified = true;
+      console.log(
+        "[patch] Patched wa-multi-session reconnect logic successfully.",
+      );
+    }
+  }
 
-if (normContent.includes(normTarget)) {
-  const newContent = normContent.replace(normTarget, patchedBlock.replace(/\r\n/g, "\n"));
-  fs.writeFileSync(targetFile, newContent, "utf8");
-  console.log("[patch] Successfully patched wa-multi-session reconnection logic!");
-} else {
-  console.warn("[patch] Target block not matched in wa-multi-session, skipping automatic patch.");
+  // Patch 1B: Baileys Socket options (keepAliveIntervalMs, defaultQueryTimeoutMs, getMessage retry handler)
+  if (!content.includes("getGatewayMessage")) {
+    const patchedSocketOpts = `        /* WA_GATEWAY_PATCHED_SOCKET_OPTS */
+        const sock = (0, baileys_1.default)({
+            version,
+            auth: state,
+            logger: P,
+            markOnlineOnConnect: false,
+            browser: baileys_1.Browsers.ubuntu("Chrome"),
+            defaultQueryTimeoutMs: 90000,
+            keepAliveIntervalMs: 15000,
+            connectTimeoutMs: 30000,
+            retryRequestDelayMs: 500,
+            maxMsgRetryCount: 5,
+            getMessage: async (key) => {
+                if (typeof global.getGatewayMessage === "function") {
+                    return await global.getGatewayMessage(sessionId, key);
+                }
+                return undefined;
+            },
+        });`;
+
+    const normContent = content.replace(/\r\n/g, "\n");
+    const origTarget = `        const sock = (0, baileys_1.default)({
+            version,
+            auth: state,
+            logger: P,
+            markOnlineOnConnect: false,
+            browser: baileys_1.Browsers.ubuntu("Chrome"),
+        });`.replace(/\r\n/g, "\n");
+
+    const prevPatchedTarget = `        /* WA_GATEWAY_PATCHED_SOCKET_OPTS */
+        const sock = (0, baileys_1.default)({
+            version,
+            auth: state,
+            logger: P,
+            markOnlineOnConnect: false,
+            browser: baileys_1.Browsers.ubuntu("Chrome"),
+            defaultQueryTimeoutMs: 90000,
+            keepAliveIntervalMs: 15000,
+            connectTimeoutMs: 30000,
+            retryRequestDelayMs: 500,
+            maxMsgRetryCount: 5,
+        });`.replace(/\r\n/g, "\n");
+
+    if (normContent.includes(prevPatchedTarget)) {
+      content = normContent.replace(
+        prevPatchedTarget,
+        patchedSocketOpts.replace(/\r\n/g, "\n"),
+      );
+      modified = true;
+      console.log(
+        "[patch] Updated wa-multi-session socket options with getMessage retry handler.",
+      );
+    } else if (normContent.includes(origTarget)) {
+      content = normContent.replace(
+        origTarget,
+        patchedSocketOpts.replace(/\r\n/g, "\n"),
+      );
+      modified = true;
+      console.log(
+        "[patch] Patched wa-multi-session socket options with getMessage retry handler.",
+      );
+    }
+  }
+
+  // Patch 1C: messages.upsert message caching for retry decryption (fixes "Waiting for this message")
+  if (!content.includes("/* WA_GATEWAY_PATCHED_UPSERT_CACHE */")) {
+    const targetUpsert = `                if (events["messages.upsert"]) {
+                    const msg = (_p = events["messages.upsert"]
+                        .messages) === null || _p === void 0 ? void 0 : _p[0];`;
+
+    const patchedUpsert = `                if (events["messages.upsert"]) {
+                    /* WA_GATEWAY_PATCHED_UPSERT_CACHE */
+                    try {
+                        for (const m of events["messages.upsert"].messages || []) {
+                            if (m && m.key && m.key.id && m.message && typeof global.saveGatewayMessage === "function") {
+                                global.saveGatewayMessage(m.key.id, m.message);
+                            }
+                        }
+                    } catch (e) {}
+                    const msg = (_p = events["messages.upsert"]
+                        .messages) === null || _p === void 0 ? void 0 : _p[0];`;
+
+    const normContent = content.replace(/\r\n/g, "\n");
+    const normTarget = targetUpsert.replace(/\r\n/g, "\n");
+    if (normContent.includes(normTarget)) {
+      content = normContent.replace(
+        normTarget,
+        patchedUpsert.replace(/\r\n/g, "\n"),
+      );
+      modified = true;
+      console.log(
+        "[patch] Patched wa-multi-session upsert cache for retry decryption successfully.",
+      );
+    }
+  }
+
+  if (modified) {
+    fs.writeFileSync(waSocketFile, content, "utf8");
+  } else {
+    console.log("[patch] wa-multi-session socket logic is up to date.");
+  }
+}
+
+// 2. Patch @whiskeysockets/baileys (messages-send.js: refreshMediaConn rejected promise & timeout fix)
+const baileysSendFile = path.resolve(
+  __dirname,
+  "../node_modules/@whiskeysockets/baileys/lib/Socket/messages-send.js",
+);
+
+if (fs.existsSync(baileysSendFile)) {
+  let bContent = fs.readFileSync(baileysSendFile, "utf8");
+
+  if (!bContent.includes("/* WA_GATEWAY_PATCHED_MEDIA_CONN */")) {
+    const targetMediaConn = `    let mediaConn;
+    const refreshMediaConn = async (forceGet = false) => {
+        const media = await mediaConn;
+        if (!media || forceGet || new Date().getTime() - media.fetchDate.getTime() > media.ttl * 1000) {
+            mediaConn = (async () => {
+                const result = await query({
+                    tag: 'iq',
+                    attrs: {
+                        type: 'set',
+                        xmlns: 'w:m',
+                        to: S_WHATSAPP_NET
+                    },
+                    content: [{ tag: 'media_conn', attrs: {} }]
+                });
+                const mediaConnNode = getBinaryNodeChild(result, 'media_conn');
+                const node = {
+                    hosts: getBinaryNodeChildren(mediaConnNode, 'host').map(({ attrs }) => ({
+                        hostname: attrs.hostname,
+                        maxContentLengthBytes: +attrs.maxContentLengthBytes
+                    })),
+                    auth: mediaConnNode.attrs.auth,
+                    ttl: +mediaConnNode.attrs.ttl,
+                    fetchDate: new Date()
+                };
+                logger.debug('fetched media conn');
+                return node;
+            })();
+        }
+        return mediaConn;
+    };`;
+
+    const patchedMediaConn = `    /* WA_GATEWAY_PATCHED_MEDIA_CONN */
+    let mediaConn;
+    const refreshMediaConn = async (forceGet = false) => {
+        let media;
+        try {
+            media = await mediaConn;
+        } catch {
+            mediaConn = undefined;
+            media = undefined;
+        }
+        if (!media || forceGet || new Date().getTime() - media.fetchDate.getTime() > media.ttl * 1000) {
+            mediaConn = (async () => {
+                try {
+                    const result = await query({
+                        tag: 'iq',
+                        attrs: {
+                            type: 'set',
+                            xmlns: 'w:m',
+                            to: S_WHATSAPP_NET
+                        },
+                        content: [{ tag: 'media_conn', attrs: {} }]
+                    });
+                    const mediaConnNode = getBinaryNodeChild(result, 'media_conn');
+                    const node = {
+                        hosts: getBinaryNodeChildren(mediaConnNode, 'host').map(({ attrs }) => ({
+                            hostname: attrs.hostname,
+                            maxContentLengthBytes: +attrs.maxContentLengthBytes
+                        })),
+                        auth: mediaConnNode.attrs.auth,
+                        ttl: +mediaConnNode.attrs.ttl,
+                        fetchDate: new Date()
+                    };
+                    logger.debug('fetched media conn');
+                    return node;
+                } catch (err) {
+                    mediaConn = undefined;
+                    throw err;
+                }
+            })();
+        }
+        return mediaConn;
+    };`;
+
+    const normBContent = bContent.replace(/\r\n/g, "\n");
+    const normBTarget = targetMediaConn.replace(/\r\n/g, "\n");
+    if (normBContent.includes(normBTarget)) {
+      bContent = normBContent.replace(
+        normBTarget,
+        patchedMediaConn.replace(/\r\n/g, "\n"),
+      );
+      fs.writeFileSync(baileysSendFile, bContent, "utf8");
+      console.log(
+        "[patch] Patched Baileys refreshMediaConn (timeout recovery) successfully.",
+      );
+    } else {
+      console.warn(
+        "[patch] Target block not matched in Baileys messages-send.js, skipping.",
+      );
+    }
+  } else {
+    console.log("[patch] Baileys refreshMediaConn is already patched.");
+  }
 }
