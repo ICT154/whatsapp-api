@@ -117,7 +117,10 @@ exports.createSession = async (req, res, next) => {
     if (isWebRequest) {
       const token = req.cookies?.auth_session;
       if (!verifyAuthToken(token)) {
-        return res.redirect("/login");
+        return res.status(200).json({
+          status: true,
+          message: "WhatsApp API Gateway is running",
+        });
       }
     }
 

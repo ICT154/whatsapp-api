@@ -33,6 +33,7 @@ assert(
 console.log("PASS: 2. wa-multi-session socket getMessage handler and upsert cache are present");
 
 // 3. Test in-memory gateway message store
+process.env.PORT = "5098";
 require("../index.js");
 assert(typeof global.saveGatewayMessage === "function", "global.saveGatewayMessage must be defined");
 assert(typeof global.getGatewayMessage === "function", "global.getGatewayMessage must be defined");

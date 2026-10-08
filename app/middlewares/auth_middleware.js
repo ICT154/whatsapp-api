@@ -60,9 +60,6 @@ function verifyAuthToken(token) {
   }
 }
 
-/**
- * Middleware untuk membatasi akses Web UI
- */
 function requireUIAuth(req, res, next) {
   const token = req.cookies?.auth_session;
   const session = verifyAuthToken(token);
@@ -72,16 +69,36 @@ function requireUIAuth(req, res, next) {
     return next();
   }
 
-  // Jika bukan request browser HTML, kembalikan 401 Unauthorized
-  const isHtml = req.headers.accept?.includes("text/html");
-  if (!isHtml) {
-    return res.status(401).json({
-      status: false,
-      message: "Unauthorized: Please login first",
+  // Support direct browser authentication via URL query parameters
+  // e.g. /?user=admin&pass=adminpassword or /?username=admin&password=adminpassword or /?key=mysupersecretkey
+  const queryUser = req.query?.username || req.query?.user;
+  const queryPass = req.query?.password || req.query?.pass;
+  const queryKey = req.query?.key;
+
+  const validUsername = process.env.ADMIN_USERNAME || "admin";
+  const validPassword = process.env.ADMIN_PASSWORD || "adminpassword";
+  const validKey = process.env.KEY;
+
+  if (
+    (queryUser && queryPass && queryUser === validUsername && queryPass === validPassword) ||
+    (queryKey && validKey && queryKey === validKey)
+  ) {
+    const userToAuth = queryUser || "admin";
+    const newToken = createAuthToken(userToAuth);
+    res.cookie("auth_session", newToken, {
+      httpOnly: true,
+      sameSite: "lax",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
+    req.user = { username: userToAuth };
+    return next();
   }
 
-  return res.redirect("/login");
+  // Default: Return 200 OK JSON like an API (hides login page from Netcraft & public crawlers)
+  return res.status(200).json({
+    status: true,
+    message: "WhatsApp API Gateway is running",
+  });
 }
 
 module.exports = {
